@@ -1,1 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "League Spartan";
+  src: url("../src/assets/fonts/LeagueSpartan-VariableFont_wght.ttf")
+    format("truetype");
+}
+
+html {
+  font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family: "League Spartan", sans-serif;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+:root {
+  --color-primary: #7c5dfa;
+  --color-primary-light: #9277ff;
+
+  --color-secondary: #1e2139;
+  --color-secondary-dark: #252945;
+
+  --color-grey: #dfe3fa;
+  --color-grey-medium: #888eb0;
+  --color-grey-dark: #7e88c3;
+
+  --color-bg-base: #0c0e16;
+  --color-bg-light: #f8f8fb;
+  --color-bg-dark: #141625;
+
+  --color-error: #ec5757;
+  --color-error-light: #ff9797;
+}

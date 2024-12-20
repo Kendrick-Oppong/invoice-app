@@ -1,0 +1,74 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "plugin:@ngrx/store"
+      ],
+      "rules": {
+        "@angular-eslint/component-class-suffix": [
+          "error",
+          {
+            "suffixes": ["Component", "View"]
+          }
+        ],
+        "@angular-eslint/directive-class-suffix": [
+          "error",
+          {
+            "suffixes": ["Directive"]
+          }
+        ],
+        "@angular-eslint/no-empty-lifecycle-method": "off",
+        "@angular-eslint/no-host-metadata-property": "off",
+        "@angular-eslint/no-input-rename": "off",
+        "@angular-eslint/no-output-native": "off",
+        "@angular-eslint/no-output-on-prefix": "off",
+        "@angular-eslint/use-lifecycle-interface": "off",
+        "@angular-eslint/use-pipe-transform-interface": "off",
+        "no-console": "warn",
+        "no-debugger": "error",
+        "eqeqeq": ["error", "always"],
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+        "import/order": [
+          "error",
+          {
+            "groups": [
+              ["builtin", "external"],
+              ["internal", "parent", "sibling", "index"]
+            ],
+            "newlines-between": "always"
+          }
+        ],
+
+        "import/no-unresolved": "error",
+        "prettier/prettier": [
+          "error",
+          { "singleQuote": true, "printWidth": 80 }
+        ],
+        "@ngrx/store/no-unused-store": "warn",
+        "@ngrx/store/no-actions": "error",
+        "@ngrx/store/no-reducer-action": "warn",
+        "@ngrx/store/no-effects-in-services": "error"
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {
+        "max-len": ["error", { "code": 120 }],
+        "@angular-eslint/template/banana-in-box": "error"
+      }
+    }
+  ],
+  "plugins": ["import", "prettier", "@ngrx/store"]
+}
