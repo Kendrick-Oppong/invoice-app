@@ -84,4 +84,11 @@ h6 {
 
   --color-error: #ec5757;
   --color-error-light: #ff9797;
+
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 992px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1440px;
+  --breakpoint-xxl: 1920px;
 }
