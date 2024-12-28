@@ -1,0 +1,25 @@
+.sidebar {
+  background-color: var(--color-steel-gray);
+  min-height: 100%;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar__theme {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.sidebar__theme-icon-container {
+  width: 100%;
+  border-bottom: 2px solid var(--color-border-gray);
+  padding-bottom: 3rem;
+}
+
