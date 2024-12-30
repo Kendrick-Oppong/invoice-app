@@ -12,4 +12,5 @@ import { IconData } from '@interfaces/index';
   
 export class IconComponent {
   @Input({ required: true }) iconData!: IconData;
+  
 }

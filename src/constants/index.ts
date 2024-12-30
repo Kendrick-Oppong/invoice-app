@@ -20,4 +20,18 @@ export const ICONS = {
     height: 103,
     className: 'sidebar__logo-image',
   },
+  plus: {
+    src: 'assets/icon-plus.svg',
+    alt: 'plus',
+    width: 10,
+    height: 10,
+    className: 'plus-icon',
+  },
+  carretDown: {
+    src: 'assets/icon-arrow-down.svg',
+    alt: 'plus',
+    width: 8.46,
+    height: 4.2,
+    className: 'plus-icon',
+  },
 };
