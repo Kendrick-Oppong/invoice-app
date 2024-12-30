@@ -1,0 +1,25 @@
+button {
+  border-radius: 2.4rem;
+  background-color: var(--color-primary-blue);
+  cursor: pointer;
+  min-width: 15rem;
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  gap: 1.6rem;
+  border: none;
+}
+
+button:hover {
+  background-color: var(--color-secondary-blue);
+}
+
+.button__icon {
+  padding: 1.1rem;
+  border-radius: 100%;
+  background-color: var(--color-white);
+}
+
+.button__headline {
+  color: var(--color-white);
+}

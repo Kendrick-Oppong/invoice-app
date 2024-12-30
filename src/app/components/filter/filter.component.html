@@ -1,1 +1,55 @@
-<p>filter works!</p>
+<div class="filter">
+  <button (click)="toggleFilter()">
+    <app-headline>Filter by status</app-headline>
+  </button>
+  <app-icon [iconData]="icon.carretDown"></app-icon>
+</div>
+
+@if (showFilter) {
+<form
+  #filterForm
+  class="checkbox-form"
+  aria-labelledby="status-label"
+  (change)="onFormChange()"
+>
+  <div class="checkbox-form__item">
+    <input
+      type="checkbox"
+      id="draft"
+      class="checkbox-form__input"
+      name="status"
+      [(ngModel)]="status.draft"
+    />
+    <app-headline>
+      <label for="draft" class="checkbox-form__label">Draft</label>
+    </app-headline>
+  </div>
+
+  <div class="checkbox-form__item">
+    <input
+      type="checkbox"
+      id="pending"
+      class="checkbox-form__input"
+      name="status"
+      [(ngModel)]="status.pending"
+      checked
+    />
+    <app-headline>
+      <label for="pending" class="checkbox-form__label">Pending</label>
+    </app-headline>
+  </div>
+
+  <div class="checkbox-form__item">
+    <input
+      type="checkbox"
+      id="paid"
+      class="checkbox-form__input"
+      name="status"
+      [(ngModel)]="status.paid"
+    />
+    <app-headline>
+      <label for="paid" class="checkbox-form__label">Paid</label>
+    </app-headline>
+  </div>
+</form>
+}
