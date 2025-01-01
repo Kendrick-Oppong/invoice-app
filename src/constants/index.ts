@@ -25,13 +25,23 @@ export const ICONS = {
     alt: 'plus',
     width: 10,
     height: 10,
-    className: 'plus-icon',
   },
   carretDown: {
     src: 'assets/icon-arrow-down.svg',
     alt: 'plus',
-    width: 8.46,
-    height: 4.2,
-    className: 'plus-icon',
+    width: 8,
+    height: 6,
+  },
+  carretRight: {
+    src: 'assets/icon-arrow-right.svg',
+    alt: 'arrow-right',
+    width: 8,
+    height: 8,
+  },
+  illustration: {
+    src: 'assets/illustration-empty.svg',
+    alt: 'arrow-right',
+    width: 242,
+    height: 200,
   },
 };
