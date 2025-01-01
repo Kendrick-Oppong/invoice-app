@@ -5,21 +5,21 @@
 }
 
 .heading__One {
-  font-size: 3.2rem;
-  letter-spacing: -1;
+  font-size: 3.5rem;
+  letter-spacing: -1px;
 }
 
 .heading__Two {
-  font-size: 2rem;
-  letter-spacing: -0.63;
+  font-size: 2.2rem;
+  letter-spacing: -0.63px;
 }
 
 .heading__Three {
-  font-size: 1.6rem;
-  letter-spacing: -0.8;
+  font-size: 1.8rem;
+  letter-spacing: -0.8px;
 }
 
 .heading__default {
-  font-size: 1.2rem;
-  letter-spacing: -0.25;
+  font-size: 1.4rem;
+  letter-spacing: -0.25px;
 }
