@@ -4,7 +4,7 @@ import { TextComponent } from '@components/text/text.component';
 import { FilterComponent } from '@components/filter/filter.component';
 import { ButtonComponent } from '@components/button/button.component';
 import { Store } from '@ngrx/store';
-import { selectInvoices } from '@app/store/reducers';
+import { selectFilteredInvoices } from '@app/store/reducers';
 
 @Component({
   selector: 'app-header',
@@ -15,5 +15,5 @@ import { selectInvoices } from '@app/store/reducers';
 })
 export class HeaderComponent {
   private store: Store = inject(Store);
-  readonly invoices = this.store.selectSignal(selectInvoices);
+  readonly invoices = this.store.selectSignal(selectFilteredInvoices);
 }
