@@ -1,1 +1,26 @@
-<app-header/>
+<app-header />
+
+<div>
+  @if (loading()) {
+  <div class="loading">
+    <span class="loader"></span>
+  </div>
+  } @else if (error()) {
+  <p>Error loading invoices. Please try again.</p>
+  } @else {
+  <ul>
+    @for (invoice of invoices(); track $index) {
+    <app-invoice-card [invoice]="invoice" />
+    }@empty {
+    <div class="empty-state">
+      <app-icon [iconData]="icons.illustration" />
+      <app-headline variant="h1">There is nothing here</app-headline>
+      <app-text variant="p">
+        Create an invoice by clicking the <br> New Invoice button and get
+        started</app-text
+      >
+    </div>
+    }
+  </ul>
+  }
+</div>
