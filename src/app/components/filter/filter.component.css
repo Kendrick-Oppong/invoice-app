@@ -34,6 +34,16 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+span {
+  display: none;
+}
+
 .checkbox-form__item:not(:first-of-type) {
   margin-top: 0.8rem;
+}
+
+@media screen and (min-width: 768px) {
+  span {
+    display: inline-block;
+  }
 }

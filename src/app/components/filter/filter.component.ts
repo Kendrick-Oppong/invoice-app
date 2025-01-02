@@ -1,8 +1,18 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  ElementRef,
+  HostListener,
+  inject,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ICONS } from '@constants/index';
 import { HeadlineComponent } from '@components/headline/headline.component';
 import { IconComponent } from '@components/icon/icon.component';
+import { Store } from '@ngrx/store';
+import { invoiceActions } from '@app/store/actions';
 
 @Component({
   selector: 'app-filter',
@@ -14,12 +24,19 @@ import { IconComponent } from '@components/icon/icon.component';
 export class FilterComponent {
   readonly icon = ICONS;
   showFilter = false;
+  private readonly store: Store = inject(Store);
 
-  status = {
+  status = signal({
     draft: false,
     pending: false,
     paid: false,
-  };
+  });
+
+  selectedStatuses = computed(() => {
+    return Object.entries(this.status())
+      .filter(([_, isSelected]) => isSelected)
+      .map(([status]) => status);
+  });
 
   @ViewChild('filterForm', { static: false }) filterForm!: ElementRef;
 
@@ -38,5 +55,9 @@ export class FilterComponent {
     }
   }
 
-  onFormChange() {}
+  onFormChange() {
+    this.store.dispatch(
+      invoiceActions.filterInvoices({ statuses: this.selectedStatuses() })
+    );
+  }
 }
