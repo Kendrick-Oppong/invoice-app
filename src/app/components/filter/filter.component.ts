@@ -1,10 +1,8 @@
 import {
   Component,
-  computed,
   ElementRef,
   HostListener,
   inject,
-  signal,
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -26,17 +24,12 @@ export class FilterComponent {
   showFilter = false;
   private readonly store: Store = inject(Store);
 
-  status = signal({
+  status = {
     draft: false,
     pending: false,
     paid: false,
-  });
+  };
 
-  selectedStatuses = computed(() => {
-    return Object.entries(this.status())
-      .filter(([_, isSelected]) => isSelected)
-      .map(([status]) => status);
-  });
 
   @ViewChild('filterForm', { static: false }) filterForm!: ElementRef;
 
@@ -53,6 +46,14 @@ export class FilterComponent {
     ) {
       this.showFilter = false;
     }
+  }
+
+  selectedStatuses() {
+    const statuses: string[] = [];
+    if (this.status.draft) statuses.push('draft');
+    if (this.status.pending) statuses.push('pending');
+    if (this.status.paid) statuses.push('paid');
+    return statuses;
   }
 
   onFormChange() {
