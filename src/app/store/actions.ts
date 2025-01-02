@@ -19,5 +19,7 @@ export const invoiceActions = createActionGroup({
     'Load Invoices': emptyProps(),
     'Load Invoices Success': props<{ invoices: Invoice[] }>(),
     'Load Invoices Failure': props<{ error: string }>(),
+
+    'Filter Invoices': props<{ statuses: string[] }>(),
   },
 });

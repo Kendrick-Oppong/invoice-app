@@ -7,6 +7,7 @@ export const initialState: InvoiceState = {
   invoices: [],
   loading: false,
   error: null,
+  filteredInvoices: [],
 };
 
 export const InvoiceFeature = createFeature({
@@ -24,6 +25,7 @@ export const InvoiceFeature = createFeature({
     on(invoiceActions.loadInvoicesSuccess, (state, { invoices }) =>
       produce(state, (draft) => {
         draft.invoices = invoices;
+        draft.filteredInvoices = invoices;
         draft.loading = false;
       })
     ),
@@ -94,8 +96,24 @@ export const InvoiceFeature = createFeature({
         draft.error = error;
         draft.loading = false;
       })
+    ),
+    on(invoiceActions.filterInvoices, (state, { statuses }) =>
+      produce(state, (draft) => {
+        if (statuses.length === 0) {
+          draft.filteredInvoices = draft.invoices;
+        } else {
+          draft.filteredInvoices = draft.invoices.filter((invoice) =>
+            statuses.includes(invoice.status)
+          );
+        }
+      })
     )
   ),
 });
 
-export const { selectInvoices, selectLoading, selectError } = InvoiceFeature;
+export const {
+  selectInvoices,
+  selectLoading,
+  selectError,
+  selectFilteredInvoices,
+} = InvoiceFeature;

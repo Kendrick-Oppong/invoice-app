@@ -39,6 +39,7 @@ export interface InvoiceState {
   invoices: Invoice[];
   loading: boolean;
   error: string | null;
+  filteredInvoices: Invoice[];
 }
 
 export type BadgeStatus = 'paid' | 'pending' | 'draft';
