@@ -1,0 +1,51 @@
+.badge {
+  min-width: 10.4rem;
+  padding: 1.3rem 3rem;
+  text-align: center;
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+.badge:focus {
+  outline: 2px solid var(--color-secondary-blue); 
+}
+
+.badge--paid::before,
+.badge--draft::before,
+.badge--pending::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.badge--paid::before {
+  background-color: var(--color-mint-green);
+}
+
+.badge--pending::before {
+  background-color: var(--color-amber);
+}
+
+.badge--draft::before {
+  background-color: var(--color-steel-gray);
+}
+
+.badge--paid {
+  background-color: var(--color-badge-mint-green);
+  color: var(--color-mint-green);
+}
+
+.badge--pending {
+  background-color: var(--color-badge-amber);
+  color: var(--color-amber);
+}
+
+.badge--draft {
+  background-color: var(--color-badge-steel-gray);
+  color: var(--color-steel-gray);
+}
