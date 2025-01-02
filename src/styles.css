@@ -89,9 +89,14 @@ h6 {
   --color-almost-white: #f8f8fb;
   --color-midnight-gray: #141625;
   --color-white: #ffffff;
-
+  --box-shadow-color: #48549f40;
+  --color-btn-three:#F9FAFE
   --color-error: #ec5757;
   --color-error-light: #ff9797;
+
+  --color-badge-mint-green: hsla(160, 67%, 52%, 0.057);
+  --color-badge-steel-gray: hsla(231, 20%, 27%, 0.057);
+  --color-badge-amber: hsla(34, 100%, 50%, 0.057);
 
   --breakpoint-tablet: 768px;
   --breakpoint-small-desktop: 992px;
@@ -113,3 +118,14 @@ body {
   background-color: var(--color-almost-white);
   min-height: 100dvh;
 }
+
+.sidebar__logo-img img{
+  width: 6.5rem ;
+  height: 6.5rem ;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar__logo-img img{
+  width: auto;
+  height: auto ;
+}}
