@@ -1,1 +1,8 @@
-<p>icon works!</p>
+<img
+  [ngSrc]="iconData.src"
+  [alt]="iconData.alt ?? ''"
+  [width]="iconData.width"
+  [height]="iconData.height"
+  [class]="iconData.className ?? ''"
+  priority
+/>
