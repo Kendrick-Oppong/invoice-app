@@ -28,7 +28,14 @@ span {
   background-color: var(--color-btn-three);
   color: var(--color-soft-blue);
   justify-content: center;
+  padding: 1.7rem 2.4rem;
 }
+
+.button__headline--three {
+  color: var(--color-soft-blue);
+}
+
+
 
 .button--three:hover {
   background-color: var(--color-light-gray);
@@ -38,6 +45,7 @@ span {
   background-color: var(--color-steel-gray);
   color: var(--color-muted-blue);
   justify-content: center;
+  padding: 1.7rem 2.4rem;
 }
 
 .button--four:hover {
@@ -48,6 +56,7 @@ span {
   background-color: var(--color-error);
   color: var(--color-white);
   justify-content: center;
+  padding: 1.7rem 2.4rem;
 }
 
 .button--five:hover {
@@ -58,6 +67,7 @@ span {
   background-color: var(--color-btn-three);
   color: var(--color-soft-blue);
   justify-content: center;
+  padding: 1.7rem 2.4rem;
 }
 
 .button--six:hover {
