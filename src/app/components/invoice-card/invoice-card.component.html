@@ -1,51 +1,51 @@
-<article
-  class="invoice-card"
-  aria-labelledby="invoice-id"
-  aria-describedby="invoice-details"
-  tabindex="0"
->
-  <div class="invoice-id">
-    <app-headline id="invoice-id" class="invoice-card__title">
-      <span aria-hidden="true">#</span>{{ invoice().id }}
-    </app-headline>
+<a [routerLink]="invoice().id" ariaCurrentWhenActive="page">
+  <article
+    class="invoice-card"
+    aria-labelledby="invoice-id"
+    aria-describedby="invoice-details"
+    tabindex="0"
+  >
+    <div class="invoice-id">
+      <app-headline id="invoice-id" class="invoice-card__title">
+        <span aria-hidden="true">#</span>{{ invoice().id }}
+      </app-headline>
 
-    <app-text variant="p" class="invoice-card__date">
-      {{ invoice().createdAt }}
-    </app-text>
+      <app-text variant="p" class="invoice-card__date">
+        {{ invoice().createdAt }}
+      </app-text>
 
-    <app-text variant="p" class="invoice-card__name">
-      <span aria-label="Client Name">{{ invoice().clientName }} </span>
-    </app-text>
+      <app-text variant="p" class="invoice-card__name">
+        <span aria-label="Client Name">{{ invoice().clientName }} </span>
+      </app-text>
 
-    <app-headline variant="h3" class="invoice-card__title">
-      £ {{ invoice().total }}
-    </app-headline>
+      <app-headline variant="h3" class="invoice-card__title">
+        £ {{ invoice().total }}
+      </app-headline>
 
-    <app-badge [status]="invoice().status" />
+      <app-badge [status]="invoice().status" />
 
-    <app-text variant="p" class="invoice-card__status" aria-hidden="true">
-      <app-icon
-        [iconData]="icon.carretRight"
-        aria-label="Navigate to detailed invoice"
-      />
-    </app-text>
-  </div>
+      <app-text variant="p" class="invoice-card__status" aria-hidden="true">
+        <app-icon
+          [iconData]="icon.carretRight"
+          aria-label="Navigate to detailed invoice"
+        />
+      </app-text>
+    </div>
 
-  <div class="invoice-layout">
-    <app-headline id="invoice-id" class="invoice-card__title">
-      <span aria-hidden="true">#</span>{{ invoice().id }}
-    </app-headline>
-    <app-text variant="p" class="invoice-card__date">
-      {{ invoice().createdAt }}
-    </app-text>
-    <app-headline variant="h3" >
-      £ {{ invoice().total }}
-    </app-headline>
-  </div>
-  <div class="invoice-layout">
-    <app-text variant="p" class="invoice-card__name">
-      <span aria-label="Client Name">{{ invoice().clientName }} </span>
-    </app-text>
-    <app-badge [status]="invoice().status" />
-  </div>
-</article>
+    <div class="invoice-layout">
+      <app-headline id="invoice-id" class="invoice-card__title">
+        <span aria-hidden="true">#</span>{{ invoice().id }}
+      </app-headline>
+      <app-text variant="p" class="invoice-card__date">
+        {{ invoice().createdAt }}
+      </app-text>
+      <app-headline variant="h3"> £ {{ invoice().total }} </app-headline>
+    </div>
+    <div class="invoice-layout">
+      <app-text variant="p" class="invoice-card__name">
+        <span aria-label="Client Name">{{ invoice().clientName }} </span>
+      </app-text>
+      <app-badge [status]="invoice().status" />
+    </div>
+  </article>
+</a>

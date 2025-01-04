@@ -5,11 +5,18 @@ import { ICONS } from '@constants/index';
 import { IconComponent } from '@components/icon/icon.component';
 import { BadgeComponent } from '@components/badge/badge.component';
 import { Invoice } from '@interfaces/index';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-invoice-card',
   standalone: true,
-  imports: [HeadlineComponent, TextComponent, IconComponent, BadgeComponent],
+  imports: [
+    HeadlineComponent,
+    TextComponent,
+    IconComponent,
+    BadgeComponent,
+    RouterLink,
+  ],
   templateUrl: './invoice-card.component.html',
   styleUrl: './invoice-card.component.css',
 })
