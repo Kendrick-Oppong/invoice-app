@@ -38,6 +38,12 @@ export const ICONS = {
     width: 8,
     height: 8,
   },
+  carretLeft: {
+    src: 'assets/icon-arrow-left.svg',
+    alt: 'arrow-right',
+    width: 8,
+    height: 8,
+  },
   illustration: {
     src: 'assets/illustration-empty.svg',
     alt: 'arrow-right',
