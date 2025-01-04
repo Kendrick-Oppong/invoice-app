@@ -1,0 +1,14 @@
+.invoice-container,
+.invoice-container__filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoice-container {
+  position: relative;
+}
+
+.invoice-container__filter {
+  gap: 4rem;
+}

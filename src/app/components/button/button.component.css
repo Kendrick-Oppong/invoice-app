@@ -1,0 +1,100 @@
+button {
+  border-radius: 2.4rem;
+  background-color: var(--color-primary-blue);
+  color: var(--color-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  padding-inline: 1.1rem;
+  gap: 1.6rem;
+  border: none;
+}
+
+span {
+  display: none;
+}
+
+.button--one {
+  min-width: auto;
+}
+
+.button--two {
+  min-width: 13.1rem;
+  padding: 1.7rem 2.4rem;
+}
+
+.button--three {
+  background-color: var(--color-btn-three);
+  color: var(--color-soft-blue);
+  justify-content: center;
+  padding: 1.7rem 2.4rem;
+}
+
+.button__headline--three {
+  color: var(--color-soft-blue);
+}
+
+
+
+.button--three:hover {
+  background-color: var(--color-light-gray);
+}
+
+.button--four {
+  background-color: var(--color-steel-gray);
+  color: var(--color-muted-blue);
+  justify-content: center;
+  padding: 1.7rem 2.4rem;
+}
+
+.button--four:hover {
+  background-color: var(--color-very-dark);
+}
+
+.button--five {
+  background-color: var(--color-error);
+  color: var(--color-white);
+  justify-content: center;
+  padding: 1.7rem 2.4rem;
+}
+
+.button--five:hover {
+  color: var(--color-error-light);
+}
+
+.button--six {
+  background-color: var(--color-btn-three);
+  color: var(--color-soft-blue);
+  justify-content: center;
+  padding: 1.7rem 2.4rem;
+}
+
+.button--six:hover {
+  background-color: var(--color-light-gray);
+}
+
+.button--one:hover,
+.button--two:hover {
+  background-color: var(--color-secondary-blue);
+}
+
+.button__icon {
+  padding: 1.1rem;
+  border-radius: 100%;
+  background-color: var(--color-white);
+}
+
+.button__headline {
+  color: var(--color-white);
+}
+
+@media screen and (min-width: 768px) {
+  span {
+    display: inline-block;
+  }
+
+  .button--one {
+    min-width: auto;
+  }
+}

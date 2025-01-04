@@ -1,1 +1,14 @@
-<p>badge works!</p>
+<div
+  class="badge"
+  [class]="{
+    'badge--pending': status() === 'pending',
+    'badge--draft': status() === 'draft',
+    'badge--paid': status() === 'paid'
+  }"
+  role="status"
+  aria-live="polite"
+  [attr.aria-label]="status() + ' status badge'"
+  tabindex="0"
+>
+  <app-headline class="badge__text"> {{ status() }}</app-headline>
+</div>
