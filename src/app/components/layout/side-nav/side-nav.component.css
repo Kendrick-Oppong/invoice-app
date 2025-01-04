@@ -3,6 +3,12 @@
   grid-template-columns: auto 1fr;
   justify-content: space-between;
   background-color: var(--color-steel-gray);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
 }
 
 .sidebar__theme {
@@ -26,6 +32,10 @@
     position: fixed;
     display: flex;
     top: 0;
+    left: auto;
+    right: auto;
+    width: auto;
+    z-index: 100;
     flex-direction: column;
     justify-content: space-between;
     border-top-right-radius: 2rem;
