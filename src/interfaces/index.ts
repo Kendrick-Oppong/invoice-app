@@ -40,11 +40,21 @@ export interface InvoiceState {
   loading: boolean;
   error: string | null;
   filteredInvoices: Invoice[];
+  showAddInvoiceForm: boolean;
 }
 
 export type BadgeStatus = 'paid' | 'pending' | 'draft';
 
 export type Headline = 'h1' | 'h2' | 'h3' | undefined;
+
+export type TextVariant = 'p' | 'span' | 'label';
+
+export type FieldProps = {
+  type: string;
+  name: string;
+  id: string;
+  class:string
+};
 
 export type ButtonType =
   | 'btn_one'
