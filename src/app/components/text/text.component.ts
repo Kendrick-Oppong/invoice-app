@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, input } from '@angular/core';
+import { TextVariant } from '@interfaces/index';
 
 @Component({
   selector: 'app-text',
@@ -9,5 +10,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './text.component.css',
 })
 export class TextComponent {
-  readonly variant = input('');
+  readonly variant = input<TextVariant>();
 }
