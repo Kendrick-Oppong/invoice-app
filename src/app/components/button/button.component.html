@@ -1,5 +1,5 @@
 @switch (variant()) { @case ('btn_one') {
-<button class="button button--one" aria-label="New invoice">
+<button (click)="addInvoice()" class="button button--one" aria-label="New invoice">
   <app-icon class="button__icon" [iconData]="icons.plus" />
   <app-headline class="button__headline">New <span>Invoice</span></app-headline>
 </button>
