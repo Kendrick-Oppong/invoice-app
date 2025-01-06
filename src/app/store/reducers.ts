@@ -8,6 +8,7 @@ export const initialState: InvoiceState = {
   loading: false,
   error: null,
   filteredInvoices: [],
+  showAddInvoiceForm: false,
 };
 
 export const InvoiceFeature = createFeature({
@@ -107,6 +108,11 @@ export const InvoiceFeature = createFeature({
           );
         }
       })
+    ),
+    on(invoiceActions.showAddInvoiceForm, (state) =>
+      produce(state, (draft) => {
+        draft.showAddInvoiceForm = !draft.showAddInvoiceForm;
+      })
     )
   ),
 });
@@ -116,4 +122,5 @@ export const {
   selectLoading,
   selectError,
   selectFilteredInvoices,
+  selectShowAddInvoiceForm,
 } = InvoiceFeature;

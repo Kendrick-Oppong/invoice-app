@@ -21,5 +21,6 @@ export const invoiceActions = createActionGroup({
     'Load Invoices Failure': props<{ error: string }>(),
 
     'Filter Invoices': props<{ statuses: string[] }>(),
+    'Show Add Invoice Form': emptyProps(),
   },
 });

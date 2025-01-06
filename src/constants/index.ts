@@ -50,4 +50,10 @@ export const ICONS = {
     width: 242,
     height: 200,
   },
+  bin: {
+    src: 'assets/icon-delete.svg',
+    alt: 'arrow-right',
+    width: 12,
+    height: 12,
+  },
 };
