@@ -46,12 +46,12 @@
           class="form__input"
           [fieldProps]="{
             id: 'fromStreet',
-            name: 'fromStreet',
+            name: 'senderStreet',
             type: 'text',
             class: 'form__input',
 
           }"
-          controlName="fromStreet"
+          controlName="senderStreet"
         />
       </div>
 
@@ -62,11 +62,11 @@
             class="form__input"
             [fieldProps]="{
               id: 'fromCity',
-              name: 'fromCity',
+              name: 'senderCity',
               type: 'text',
               class: 'form__input',
             }"
-            controlName="fromCity"
+            controlName="senderCity"
           />
         </div>
 
@@ -76,11 +76,11 @@
             class="form__input"
             [fieldProps]="{
               id: 'fromPostCode',
-              name: 'fromPostCode',
+              name: 'senderPostCode',
               type: 'text',
               class: 'form__input',
             }"
-            controlName="fromPostCode"
+            controlName="senderPostCode"
           />
         </div>
 
@@ -90,11 +90,11 @@
             class="form__input"
             [fieldProps]="{
               id: 'fromCountry',
-              name: 'fromCountry',
+              name: 'senderCountry',
               type: 'text',
               class: 'form__input'
             }"
-            controlName="fromCountry"
+            controlName="senderCountry"
           />
         </div>
       </div>
@@ -131,65 +131,66 @@
           controlName="clientEmail"
         />
       </div>
-
-      <div class="form__group">
-        <label for="street" class="form__label">Street Address</label>
-        <app-text-field
-          class="form__input"
-          [fieldProps]="{
-            id: 'street',
-            name: 'streetAddress',
-            type: 'text',
-            class: 'form__input'
-          }"
-          controlName="streetAddress"
-        />
-      </div>
-
-      <div class="form__group form__group--inline">
-        <div class="form__input-wrapper">
-          <label for="city" class="form__label">City</label>
+    
+        <div class="form__group">
+          <label for="street" class="form__label">Street Address</label>
           <app-text-field
             class="form__input"
             [fieldProps]="{
-              id: 'city',
-              name: 'city',
+              id: 'street',
+              name: 'clientStreet',
               type: 'text',
               class: 'form__input'
             }"
-            controlName="city"
+            controlName="clientStreet"
           />
         </div>
+        <div class="form__group form__group--inline">
+          <div class="form__input-wrapper">
+            <label for="city" class="form__label">City</label>
+            <app-text-field
+              class="form__input"
+              [fieldProps]="{
+                id: 'city',
+                name: 'clientCity',
+                type: 'text',
+                class: 'form__input'
+              }"
+              controlName="clientCity"
+            />
+          </div>
 
-        <div class="form__input-wrapper">
-          <label for="postCode" class="form__label">Post Code</label>
-          <app-text-field
-            class="form__input"
-            [fieldProps]="{
-              id: 'postCode',
-              name: 'postCode',
-              type: 'text',
-              class: 'form__input'
-            }"
-            controlName="postCode"
-          />
-        </div>
+          <div class="form__input-wrapper">
+            <label for="postCode" class="form__label">Post Code</label>
+            <app-text-field
+              class="form__input"
+              [fieldProps]="{
+                id: 'postCode',
+                name: 'clientPostCode',
+                type: 'text',
+                class: 'form__input'
+              }"
+              controlName="clientPostCode"
+            />
+          </div>
 
-        <div class="form__input-wrapper">
-          <label for="country" class="form__label">Country</label>
-          <app-text-field
-            class="form__input"
-            [fieldProps]="{
-              id: 'country',
-              name: 'country',
-              type: 'text',
-              class: 'form__input'
-            }"
-            controlName="country"
-          />
+          <div class="form__input-wrapper">
+            <label for="country" class="form__label">Country</label>
+            <app-text-field
+              class="form__input"
+              [fieldProps]="{
+                id: 'country',
+                name: 'clientCountry',
+                type: 'text',
+                class: 'form__input'
+              }"
+              controlName="clientCountry"
+            />
+          </div>
         </div>
-      </div>
+    
     </div>
+
 
     <!-- Invoice Date and Payment Terms -->
     <div class="form__section form__section--inline">
@@ -200,11 +201,11 @@
             class="form__input"
             [fieldProps]="{
               id: 'invoiceDate',
-              name: 'invoiceDate',
+              name: 'createdAt',
               type: 'date',
               class: 'form__input'
             }"
-            controlName="invoiceDate"
+            controlName="createdAt"
           />
         </div>
       </div>
@@ -225,10 +226,10 @@
           </select>
         </div>
       </div>
-    </div>
+    </div> 
 
     <!-- Project Description -->
-    <div class="form__group">
+ <div class="form__group">
       <label for="projectDescription" class="form__label"
         >Project Description</label
       >
@@ -236,16 +237,16 @@
         class="form__input"
         [fieldProps]="{
           id: 'projectDescription',
-          name: 'projectDescription',
+          name: 'description',
           type: 'text',
           class: 'form__input item-list__input item-list__input-first'
         }"
-        controlName="projectDescription"
+        controlName="description"
       />
-    </div>
+    </div> 
 
     <!-- Item List -->
-    <div class="form__section-header">
+  <div class="form__section-header">
       <app-headline variant="h2" class="form__section-title--mod"
         >Item List</app-headline
       >
@@ -259,12 +260,12 @@
       </div>
 
       <!-- First Item Row -->
-      <div class="item-list__row">
+     <div class="item-list__row" formGroupName="items">
         <app-text-field
           class="item-list__input-first"
           [fieldProps]="{
             id: 'itemName',
-            name: 'itemName',
+            name: 'name',
             type: 'text',
             class: 'form__input item-list__input item-list__input-first'
           }"
@@ -278,7 +279,7 @@
             type: 'text',
             class: 'form__input item-list__input'
           }"
-          controlName="quantity"
+          controlName="itemQuantity"
         />
 
         <app-text-field
@@ -288,17 +289,17 @@
             type: 'number',
             class: 'form__input item-list__input'
           }"
-          controlName="price"
+          controlName="itemPrice"
         />
 
         <app-headline variant="h3" class="item-list__total"
           >156.00</app-headline
         >
         <app-icon [iconData]="icons.bin"></app-icon>
-      </div>
+      </div> 
 
-      <!-- Second Item Row -->
-      <!-- <div class="item-list__row">
+    <!-- Second Item Row -->
+    <!-- <div class="item-list__row">
         <app-text-field
           class="item-list__input-first"
           [fieldProps]="{
@@ -335,10 +336,11 @@
         <app-icon [iconData]="icons.bin"></app-icon>
       </div> -->
 
-      <!-- Add New Item Button -->
-      <div class="add-btn-container">
-        <button>+ Add new Item</button>
-      </div>
+    <!-- Add New Item Button -->
+    <div class="add-btn-container">
+      <button>+ Add new Item</button>
     </div>
+    <!-- </div> -->
+  </div>
   </div>
 </form>

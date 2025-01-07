@@ -6,7 +6,7 @@ import {
   selectLoading,
   selectError,
 } from '@app/store/reducers';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from '@components/header/header.component';
 import { InvoiceCardComponent } from '@components/invoice-card/invoice-card.component';
 import { IconComponent } from '@components/icon/icon.component';
@@ -32,29 +32,39 @@ import { TextFieldComponent } from '@components/text-field/text-field.component'
 })
 export class InvoicesComponent implements OnInit {
   private readonly store: Store = inject(Store);
+  private readonly fb = inject(FormBuilder);
   icons = ICONS;
   invoices = this.store.selectSignal(selectFilteredInvoices);
   loading = this.store.selectSignal(selectLoading);
   error = this.store.selectSignal(selectError);
 
-  invoiceForm = new FormGroup({
-    fromStreet: new FormControl(''),
-    fromCity: new FormControl(''),
-    fromPostCode: new FormControl(''),
-    fromCountry: new FormControl(''),
-    clientName: new FormControl(''),
-    clientEmail: new FormControl(''),
-    streetAddress: new FormControl(''),
-    city: new FormControl(''),
-    postCode: new FormControl(''),
-    country: new FormControl(''),
-    invoiceDate: new FormControl(''),
-    paymentTerms: new FormControl('Net 30 Days'),
-    projectDescription: new FormControl(''),
-    itemName: new FormControl(''),
-    quantity: new FormControl(''),
-    price: new FormControl(''),
+  invoiceForm = this.fb.group({
+    createdAt: [''],
+    paymentDue: [''],
+    description: [''],
+    paymentTerms: ['Net 30 Days'],
+    clientName: [''],
+    clientEmail: [''],
+    status: ['pending'],
+
+    senderStreet: [''],
+    senderCity: [''],
+    senderPostCode: [''],
+    senderCountry: [''],
+
+    clientStreet: [''],
+    clientCity: [''],
+    clientPostCode: [''],
+    clientCountry: [''],
+
+    itemName: [''],
+    itemQuantity: [0],
+    itemPrice: [0],
+    itemTotal: [0],
+
+    total: [0],
   });
+
   ngOnInit(): void {
     this.store.dispatch(invoiceActions.loadInvoices());
   }
@@ -62,7 +72,6 @@ export class InvoicesComponent implements OnInit {
   onSubmit() {
     if (this.invoiceForm.valid) {
       console.log(this.invoiceForm.value);
-    
     }
   }
 }
