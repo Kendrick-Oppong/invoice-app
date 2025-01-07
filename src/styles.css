@@ -12,10 +12,14 @@ html {
 *::before,
 *::after {
   box-sizing: border-box;
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 * {
   margin: 0;
+  padding: 0;
 }
 
 body {

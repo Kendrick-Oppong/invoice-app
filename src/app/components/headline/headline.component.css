@@ -1,0 +1,25 @@
+.heading__One,
+.heading__Two,
+.heading__Three {
+  font-weight: bold;
+}
+
+.heading__One {
+  font-size: 3.2rem;
+  letter-spacing: -1;
+}
+
+.heading__Two {
+  font-size: 2rem;
+  letter-spacing: -0.63;
+}
+
+.heading__Three {
+  font-size: 1.6rem;
+  letter-spacing: -0.8;
+}
+
+.heading__default {
+  font-size: 1.2rem;
+  letter-spacing: -0.25;
+}

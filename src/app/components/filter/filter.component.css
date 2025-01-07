@@ -1,0 +1,37 @@
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+form {
+  position: absolute;
+  top: 5rem;
+  border-radius: 0.8rem;
+  border: 1px solid #48549f40;
+  box-shadow: 1px 1px 2px #48549f40;
+  padding: 1.5rem;
+  min-width: 10rem;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--color-primary-blue);
+  cursor: pointer;
+}
+
+.checkbox-form__item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+.checkbox-form__item:not(:first-of-type) {
+  margin-top: 0.8rem;
+}

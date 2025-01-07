@@ -3,3 +3,10 @@ main {
   grid-template-columns: auto 1fr;
   min-height: 100dvh;
 }
+
+.routes {
+  max-width: 60%;
+  width: 100%;
+  margin-inline: auto;
+  margin-top: 7.2rem;
+}
