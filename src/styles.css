@@ -12,10 +12,14 @@ html {
 *::before,
 *::after {
   box-sizing: border-box;
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 * {
   margin: 0;
+  padding: 0;
 }
 
 body {
@@ -79,15 +83,20 @@ h6 {
   --color-deep-gray: #252945;
   --color-light-gray: #dfe3fa;
   --color-muted-blue: #888eb0;
-  --color-soft-blue: #7e88c3;
+  --color-soft-blue: #7E88C3;
   --color-very-dark: #0c0e16;
   --color-steel-gray: #373b53;
   --color-almost-white: #f8f8fb;
   --color-midnight-gray: #141625;
   --color-white: #ffffff;
-
+  --box-shadow-color: #48549f40;
+  --color-btn-three:#F9FAFE;
   --color-error: #ec5757;
   --color-error-light: #ff9797;
+
+  --color-badge-mint-green: hsla(160, 67%, 52%, 0.057);
+  --color-badge-steel-gray: hsla(231, 20%, 27%, 0.057);
+  --color-badge-amber: hsla(34, 100%, 50%, 0.057);
 
   --breakpoint-tablet: 768px;
   --breakpoint-small-desktop: 992px;
@@ -109,3 +118,81 @@ body {
   background-color: var(--color-almost-white);
   min-height: 100dvh;
 }
+
+.sidebar__logo-img img{
+  width: 6.5rem ;
+  height: 6.5rem ;
+}
+
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 10rem;
+  align-items: center;
+}
+
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: #0b4ad3 #0b4ad3 transparent transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after,
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid;
+  border-color: transparent transparent var(--color-deep-gray)
+    var(--color-deep-gray);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+
+.loader::before {
+  width: 32px;
+  height: 32px;
+  border-color: var(--color-primary-blue) var(--color-primary-blue) transparent
+    transparent;
+  animation: rotation 1.5s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+
+@media screen and (min-width: 992px) {
+  .sidebar__logo-img img{
+  width: auto;
+  height: auto ;
+}}

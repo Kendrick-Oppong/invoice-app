@@ -1,1 +1,344 @@
-<p>invoices works!</p>
+<app-header />
+
+<div>
+  @if (loading()) {
+  <div class="loading">
+    <span class="loader"></span>
+  </div>
+  } @else if (error()) {
+  <p>Error loading invoices. Please try again.</p>
+  } @else {
+  <ul>
+    @for (invoice of invoices(); track $index) {
+    <app-invoice-card [invoice]="invoice" />
+    }@empty {
+    <div class="empty-state">
+      <app-icon [iconData]="icons.illustration" />
+      <app-headline variant="h1">There is nothing here</app-headline>
+      <app-text variant="p">
+        Create an invoice by clicking the <br />
+        New Invoice button and get started</app-text
+      >
+    </div>
+    }
+  </ul>
+  }
+</div>
+
+<form
+  [formGroup]="invoiceForm"
+  class="form"
+  (ngSubmit)="onSubmit()"
+  class="form"
+  aria-labelledby="form-heading"
+>
+  <div class="form__container">
+    <app-headline variant="h2" id="form-heading" class="form__headline"
+      >New Invoice</app-headline
+    >
+    <!-- Bill From Section -->
+    <div class="form__section">
+      <app-headline class="form__section-title">Bill From</app-headline>
+
+      <div class="form__group">
+        <label for="fromStreet" class="form__label">Street Address</label>
+        <app-text-field
+          class="form__input"
+          [fieldProps]="{
+            id: 'fromStreet',
+            name: 'fromStreet',
+            type: 'text',
+            class: 'form__input',
+
+          }"
+          controlName="fromStreet"
+        />
+      </div>
+
+      <div class="form__group form__group--inline">
+        <div class="form__input-wrapper">
+          <label for="fromCity" class="form__label">City</label>
+          <app-text-field
+            class="form__input"
+            [fieldProps]="{
+              id: 'fromCity',
+              name: 'fromCity',
+              type: 'text',
+              class: 'form__input',
+            }"
+            controlName="fromCity"
+          />
+        </div>
+
+        <div class="form__input-wrapper">
+          <label for="fromPostCode" class="form__label">Post Code</label>
+          <app-text-field
+            class="form__input"
+            [fieldProps]="{
+              id: 'fromPostCode',
+              name: 'fromPostCode',
+              type: 'text',
+              class: 'form__input',
+            }"
+            controlName="fromPostCode"
+          />
+        </div>
+
+        <div class="form__input-wrapper">
+          <label for="fromCountry" class="form__label">Country</label>
+          <app-text-field
+            class="form__input"
+            [fieldProps]="{
+              id: 'fromCountry',
+              name: 'fromCountry',
+              type: 'text',
+              class: 'form__input'
+            }"
+            controlName="fromCountry"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Bill To Section -->
+    <div class="form__section">
+      <app-headline class="form__section-title">Bill To</app-headline>
+
+      <div class="form__group">
+        <label for="clientName" class="form__label">Client's Name</label>
+        <app-text-field
+          class="form__input"
+          [fieldProps]="{
+            id: 'clientName',
+            name: 'clientName',
+            type: 'text',
+            class: 'form__input'
+          }"
+          controlName="clientName"
+        />
+      </div>
+
+      <div class="form__group">
+        <label for="clientEmail" class="form__label">Client's Email</label>
+        <app-text-field
+          class="form__input"
+          [fieldProps]="{
+            id: 'clientEmail',
+            name: 'clientEmail',
+            type: 'email',
+            class: 'form__input'
+          }"
+          controlName="clientEmail"
+        />
+      </div>
+
+      <div class="form__group">
+        <label for="street" class="form__label">Street Address</label>
+        <app-text-field
+          class="form__input"
+          [fieldProps]="{
+            id: 'street',
+            name: 'streetAddress',
+            type: 'text',
+            class: 'form__input'
+          }"
+          controlName="streetAddress"
+        />
+      </div>
+
+      <div class="form__group form__group--inline">
+        <div class="form__input-wrapper">
+          <label for="city" class="form__label">City</label>
+          <app-text-field
+            class="form__input"
+            [fieldProps]="{
+              id: 'city',
+              name: 'city',
+              type: 'text',
+              class: 'form__input'
+            }"
+            controlName="city"
+          />
+        </div>
+
+        <div class="form__input-wrapper">
+          <label for="postCode" class="form__label">Post Code</label>
+          <app-text-field
+            class="form__input"
+            [fieldProps]="{
+              id: 'postCode',
+              name: 'postCode',
+              type: 'text',
+              class: 'form__input'
+            }"
+            controlName="postCode"
+          />
+        </div>
+
+        <div class="form__input-wrapper">
+          <label for="country" class="form__label">Country</label>
+          <app-text-field
+            class="form__input"
+            [fieldProps]="{
+              id: 'country',
+              name: 'country',
+              type: 'text',
+              class: 'form__input'
+            }"
+            controlName="country"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Invoice Date and Payment Terms -->
+    <div class="form__section form__section--inline">
+      <div class="form__group">
+        <label for="invoiceDate" class="form__label">Invoice Date</label>
+        <div class="form__input-wrapper">
+          <app-text-field
+            class="form__input"
+            [fieldProps]="{
+              id: 'invoiceDate',
+              name: 'invoiceDate',
+              type: 'date',
+              class: 'form__input'
+            }"
+            controlName="invoiceDate"
+          />
+        </div>
+      </div>
+
+      <div class="form__group">
+        <label for="paymentTerms" class="form__label">Payment Terms</label>
+        <div class="form__input-wrapper">
+          <select
+            name="paymentTerms"
+            id="paymentTerms"
+            class="form__input"
+            aria-required="true"
+            controlName="paymentTerms"
+          >
+            <option value="Net 30 Days" selected>Net 30 Days</option>
+            <option value="Net 14 Days">Net 14 Days</option>
+            <option value="Net 7 Days">Net 7 Days</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Description -->
+    <div class="form__group">
+      <label for="projectDescription" class="form__label"
+        >Project Description</label
+      >
+      <app-text-field
+        class="form__input"
+        [fieldProps]="{
+          id: 'projectDescription',
+          name: 'projectDescription',
+          type: 'text',
+          class: 'form__input item-list__input item-list__input-first'
+        }"
+        controlName="projectDescription"
+      />
+    </div>
+
+    <!-- Item List -->
+    <div class="form__section-header">
+      <app-headline variant="h2" class="form__section-title--mod"
+        >Item List</app-headline
+      >
+    </div>
+    <div class="item-list">
+      <div class="item-list__header">
+        <app-text class="first-item" variant="p">Item Name</app-text>
+        <app-text variant="p">Qty.</app-text>
+        <app-text variant="p">Price</app-text>
+        <app-text variant="p">Total</app-text>
+      </div>
+
+      <!-- First Item Row -->
+      <div class="item-list__row">
+        <app-text-field
+          class="item-list__input-first"
+          [fieldProps]="{
+            id: 'itemName',
+            name: 'itemName',
+            type: 'text',
+            class: 'form__input item-list__input item-list__input-first'
+          }"
+          controlName="itemName"
+        />
+
+        <app-text-field
+          [fieldProps]="{
+            id: 'quantity',
+            name: 'quantity',
+            type: 'text',
+            class: 'form__input item-list__input'
+          }"
+          controlName="quantity"
+        />
+
+        <app-text-field
+          [fieldProps]="{
+            id: 'price',
+            name: 'price',
+            type: 'number',
+            class: 'form__input item-list__input'
+          }"
+          controlName="price"
+        />
+
+        <app-headline variant="h3" class="item-list__total"
+          >156.00</app-headline
+        >
+        <app-icon [iconData]="icons.bin"></app-icon>
+      </div>
+
+      <!-- Second Item Row -->
+      <!-- <div class="item-list__row">
+        <app-text-field
+          class="item-list__input-first"
+          [fieldProps]="{
+            id: 'itemName',
+            name: 'itemName',
+            type: 'text',
+            class: 'form__input item-list__input      item-list__input-first'
+          }"
+          controlName="itemName"
+        />
+
+        <app-text-field
+          [fieldProps]="{
+            id: 'quantity',
+            name: 'quantity',
+            type: 'number',
+            class: 'form__input item-list__input'
+          }"
+          controlName="quantity"
+        />
+        <app-text-field
+          [fieldProps]="{
+            id: 'price',
+            name: 'price',
+            type: 'number',
+            class: 'form__input item-list__input'
+          }"
+          controlName="price"
+        />
+
+        <app-headline variant="h3" class="item-list__total"
+          >400.00</app-headline
+        >
+        <app-icon [iconData]="icons.bin"></app-icon>
+      </div> -->
+
+      <!-- Add New Item Button -->
+      <div class="add-btn-container">
+        <button>+ Add new Item</button>
+      </div>
+    </div>
+  </div>
+</form>

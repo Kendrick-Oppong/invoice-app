@@ -1,0 +1,49 @@
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+form {
+  position: absolute;
+  z-index: 10;
+  top: 5rem;
+  border-radius: 0.8rem;
+  box-shadow: 0px 10px 10px -10px var(--box-shadow-color);
+  border: 1px solid var(--box-shadow-color);
+  padding: 1.5rem;
+  min-width: 10rem;
+  background-color: var(--color-white);
+}
+
+input[type="checkbox"] {
+  accent-color: var(--color-primary-blue);
+  cursor: pointer;
+}
+
+.checkbox-form__item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+span {
+  display: none;
+}
+
+.checkbox-form__item:not(:first-of-type) {
+  margin-top: 0.8rem;
+}
+
+@media screen and (min-width: 768px) {
+  span {
+    display: inline-block;
+  }
+}

@@ -1,0 +1,10 @@
+p,
+span,
+label {
+  font-weight: 400;
+}
+
+p {
+  font-size: 1.4rem;
+  color: var(--color-muted-blue);
+}
