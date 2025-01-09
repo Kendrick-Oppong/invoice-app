@@ -3,11 +3,13 @@
     <app-headline variant="h1">Invoices</app-headline>
     <app-text variant="p">{{ invoices().length }} total invoices</app-text>
   </div>
-
-  <div class="invoice-container__filter">
+  <div  class="invoice-container__filter">
     <app-filter />
-    <div class="invoice-container__actions">
-      <app-button variant="btn_one" />
+    <div class="invoice-container__actions" (click)="toggleAddInvoiceForm()">
+      <app-button>
+        <p><app-icon class="display" [iconData]="icons.plus" /></p>
+        <h1><span>New</span> Invoice</h1></app-button
+      >
     </div>
   </div>
 </div>
