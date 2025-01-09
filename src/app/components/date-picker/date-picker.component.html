@@ -1,0 +1,85 @@
+<!-- <div class="date-picker">
+  <div
+    class="date-picker-input"
+    [class.active]="isDatePickerOpen"
+    (click)="toggleDatePicker()"
+  >
+    <input
+      type="text"
+      [value]="selectedDate | date : 'dd MMM yyyy'"
+      [name]="fieldProps().name"
+      [id]="fieldProps().id"
+      [class]="fieldProps().class"
+      [formControlName]="controlName()"
+    />
+    <app-icon [iconData]="icons.calender" />
+  </div>
+
+  <div class="date-picker-popup" *ngIf="isDatePickerOpen">
+    <div class="date-picker-header">
+      <button (click)="previousMonth()">
+        <app-icon [iconData]="icons.carretLeft" />
+      </button>
+      <span>{{ currentMonth | date : "MMM yyyy" }}</span>
+      <button (click)="nextMonth()">
+        <app-icon [iconData]="icons.carretRight" />
+      </button>
+    </div>
+    <div class="date-picker-grid">
+      <span *ngFor="let day of daysOfWeek">{{ day }}</span>
+      <button
+        *ngFor="let date of calendarDates"
+        [class.selected]="isSelectedDate(date)"
+        [class.disabled]="isDisabled(date)"
+        (click)="selectDate(date)"
+      >
+        {{ date | date : "d" }}
+      </button>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="date-picker">
+  <div
+    class="date-picker-input"
+    [class.active]="isDatePickerOpen"
+    (click)="toggleDatePicker()"
+  >
+    <input
+      type="text"
+      [ngModel]="selectedDate | date : 'dd MMM yyyy'"
+      (ngModelChange)="selectDate($event)"
+      [name]="fieldProps().name"
+      [id]="fieldProps().id"
+      [class]="fieldProps().class"
+      [formControlName]="controlName()"
+      readonly
+    />
+    <app-icon [iconData]="icons.calender" />
+  </div>
+
+  <div class="date-picker-popup" *ngIf="isDatePickerOpen">
+    <div class="date-picker-header">
+      <button type="button" (click)="previousMonth()">
+        <app-icon [iconData]="icons.carretLeft" />
+      </button>
+      <span>{{ currentMonth | date : "MMM yyyy" }}</span>
+      <button type="button" (click)="nextMonth()">
+        <app-icon [iconData]="icons.carretRight" />
+      </button>
+    </div>
+    <div class="date-picker-grid">
+      <span *ngFor="let day of daysOfWeek">{{ day }}</span>
+      <button
+        type="button"
+        *ngFor="let date of calendarDates"
+        [class.selected]="isSelectedDate(date)"
+        [class.disabled]="isDisabled(date)"
+        (click)="selectDate(date)"
+      >
+        {{ date | date : "d" }}
+      </button>
+    </div>
+  </div>
+</div>
