@@ -1,0 +1,221 @@
+.form {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.297);
+  width: 100%;
+  overflow-y: auto;
+}
+
+label {
+  color: var(--color-soft-blue);
+  font-weight: 400;
+  font-size: 1.5rem;
+  display: block;
+  border-width: 1px;
+  border-color: var(--color-muted-blue);
+}
+
+input,
+textarea,
+input[type="text"],
+input[type="number"],
+input[type="email"] {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  height: 4.8rem;
+  border: 1px solid var(--color-muted-blue);
+  border-radius: 0.4rem;
+  font-size: 1.6rem;
+  background-color: var(--color-white) !important;
+  resize: none;
+}
+
+.form__container {
+  position: relative;
+  left: auto;
+  max-width: 100%;
+  padding: 3rem;
+  background-color: var(--color-almost-white);
+}
+
+.form__section {
+  margin-top: 2rem;
+}
+
+.form__section-title {
+  color: var(--color-primary-blue);
+}
+
+.form__group {
+  margin-top: 1.5rem;
+}
+
+.form__group--inline {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.form__section--inline {
+  display: flex;
+  gap: 3rem;
+  align-items: end;
+}
+
+.form__section--inline .form__group {
+  width: 100%;
+}
+
+.form__input-wrapper {
+  width: 100%;
+  position: relative;
+}
+
+
+
+.form__section-header {
+  margin-block: 2rem;
+}
+
+.form__section-title--mod {
+  color: var(--color-muted-blue);
+  font-weight: 700;
+}
+
+.item-list__header,
+.item-list__row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.item-list {
+  display: none;
+}
+
+.item-list__header .first-item,
+.item-list__row .item-list__input-first {
+  grid-column: span 2;
+}
+
+.add-btn-container {
+  margin-top: 3rem;
+}
+
+.add-btn-container button {
+  background-color: var(--color-light-gray);
+  color: var(--color-soft-blue);
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.5rem;
+  height: 4.8rem;
+  font-weight: 700;
+  border-radius: 2.4rem;
+}
+
+.add-btn-container button:hover {
+  background-color: var(--color-light-gray);
+}
+
+.cta_container {
+  position: sticky;
+  bottom: 0rem;
+  width: 100%;
+}
+
+.invoice__actions-mod {
+  padding: 2rem;
+}
+
+.invoice__actions-mod,
+.save_draft {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  background-color: var(--color-white);
+}
+
+.invoice__button--discard {
+  background-color: var(--color-btn-three);
+  border-radius: 2.4rem;
+}
+
+.invoice__button--discard p {
+  color: var(--color-soft-blue);
+}
+
+.invoice__button--draft {
+  background-color: var(--color-steel-gray);
+  border-radius: 2.4rem;
+}
+
+.invoice__button--save {
+  background-color: var(--color-primary-blue);
+  border-radius: 2.4rem;
+}
+
+.ng-touched.ng-invalid {
+  border: 1px solid var(--color-error) !important;
+}
+
+.form__error {
+  color: var(--color-error);
+  margin-block: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.item-list__header-mod,
+.item-list__row-mod {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.item-list-mod {
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .form {
+    backdrop-filter: blur(2px);
+  }
+  .mod-mobile {
+    display: none;
+  }
+
+  .item-list {
+    display: grid;
+  }
+
+  .form__container {
+    max-width: 80%;
+    padding: 4rem;
+  }
+
+  .form__group--inline {
+    flex-direction: row;
+  }
+
+  .cta_container {
+    width: 80%;
+    left: 0;
+  }
+}
+@media screen and (min-width: 992px) {
+  .form__container {
+    left: 10rem;
+    max-width: 50%;
+  }
+  .cta_container {
+    width: 50%;
+    left: 10rem;
+  }
+}
