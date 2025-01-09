@@ -45,6 +45,8 @@ section {
 }
 .invoice__header {
   width: 100%;
+  width: fit-content;
+  justify-content: start;
 }
 
 .invoice-details__address {
@@ -98,14 +100,14 @@ section {
   grid-template-columns: 1fr 1fr;
   padding: 1.5rem;
   align-items: center;
-  background-color: var(--color-steel-gray);
+  background-color: var(--color-midnight-gray2);
   color: var(--color-white);
   border-bottom-left-radius: 0.8rem;
   border-bottom-right-radius: 0.8rem;
 }
 
 .invoice-table__amount-label span {
-  color: var(--color-white) !important;
+  color: white !important;
 }
 
 .invoice-table__amount {
@@ -117,7 +119,6 @@ section {
   justify-content: space-between;
   align-items: center;
 }
-
 
 .invoice__actions-mod {
   display: flex;
@@ -131,6 +132,25 @@ section {
   left: 0;
   right: 0;
   width: 100%;
+}
+
+.invoice__button--edit {
+  background-color: var(--color-btn-three);
+  border-radius: 2.4rem;
+}
+
+.invoice__button--edit p {
+  color: var(--color-soft-blue);
+}
+
+.invoice__button--delete {
+  background-color: var(--color-error);
+  border-radius: 2.4rem;
+}
+
+.invoice__button--mark-paid {
+  background-color: var(--color-primary-blue);
+  border-radius: 2.4rem;
 }
 
 @media screen and (min-width: 768px) {
