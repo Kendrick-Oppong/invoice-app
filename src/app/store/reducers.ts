@@ -1,9 +1,9 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { InvoiceState } from '@interfaces/index';
-import { invoiceActions } from './actions';
+import { invoiceActions, themeActions } from './actions';
 import { produce } from 'immer';
 
-export const initialState: InvoiceState = {
+const initialState: InvoiceState = {
   invoices: [],
   loading: false,
   error: null,
@@ -15,7 +15,6 @@ export const InvoiceFeature = createFeature({
   name: 'Invoices',
   reducer: createReducer(
     initialState,
-
     // Load Invoices
     on(invoiceActions.loadInvoices, (state) =>
       produce(state, (draft) => {
@@ -124,3 +123,21 @@ export const {
   selectFilteredInvoices,
   selectShowAddInvoiceForm,
 } = InvoiceFeature;
+
+const themeState: { isDarkTheme: boolean } = {
+  isDarkTheme: false,
+};
+
+export const themeFeature = createFeature({
+  name: 'theme',
+  reducer: createReducer(
+    themeState,
+    on(themeActions.toggleTheme, (state) =>
+      produce(state, (draft) => {
+        draft.isDarkTheme = !draft.isDarkTheme;
+      })
+    )
+  ),
+});
+
+export const { selectIsDarkTheme } = themeFeature;

@@ -24,3 +24,10 @@ export const invoiceActions = createActionGroup({
     'Show Add Invoice Form': emptyProps(),
   },
 });
+
+export const themeActions = createActionGroup({
+  source: 'Theme',
+  events: {
+    'Toggle Theme': emptyProps(),
+  },
+});
