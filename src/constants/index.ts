@@ -6,6 +6,13 @@ export const ICONS = {
     height: 20,
     className: 'sidebar__theme-icon',
   },
+  sun: {
+    src: 'assets/icon-sun.svg',
+    alt: 'Moon Icon',
+    width: 20,
+    height: 20,
+    className: 'sidebar__theme-icon',
+  },
   avatar: {
     src: 'assets/image-avatar.jpg',
     alt: 'User Avatar',
@@ -55,5 +62,11 @@ export const ICONS = {
     alt: 'arrow-right',
     width: 12,
     height: 12,
+  },
+  calender: {
+    src: 'assets/icon-calendar.svg',
+    alt: 'arrow-right',
+    width: 16,
+    height: 16,
   },
 };
