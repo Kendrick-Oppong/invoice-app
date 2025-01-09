@@ -5,15 +5,29 @@ import { FilterComponent } from '@components/filter/filter.component';
 import { ButtonComponent } from '@components/button/button.component';
 import { Store } from '@ngrx/store';
 import { selectFilteredInvoices } from '@app/store/reducers';
+import { ICONS } from '@constants/index';
+import { IconComponent } from '@components/icon/icon.component';
+import { invoiceActions } from '@app/store/actions';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [HeadlineComponent, TextComponent, FilterComponent, ButtonComponent],
+  imports: [
+    HeadlineComponent,
+    TextComponent,
+    FilterComponent,
+    ButtonComponent,
+    IconComponent,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  private store: Store = inject(Store);
+  private readonly store: Store = inject(Store);
+  readonly icons = ICONS;
   readonly invoices = this.store.selectSignal(selectFilteredInvoices);
+
+  toggleAddInvoiceForm() {
+    this.store.dispatch(invoiceActions.showAddInvoiceForm());
+  }
 }
