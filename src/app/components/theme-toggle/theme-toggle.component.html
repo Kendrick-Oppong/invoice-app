@@ -1,1 +1,7 @@
-<p>theme-toggle works!</p>
+<div (click)="toggleTheme()">
+  @if (isDarkMode()) {
+  <app-icon [iconData]="iconData.sun" />
+  } @else {
+  <app-icon [iconData]="iconData.moon" />
+  }
+</div>
