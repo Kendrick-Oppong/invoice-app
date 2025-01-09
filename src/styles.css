@@ -83,17 +83,20 @@ h6 {
   --color-deep-gray: #252945;
   --color-light-gray: #dfe3fa;
   --color-muted-blue: #888eb0;
-  --color-soft-blue: #7E88C3;
+  --color-soft-blue: #7e88c3;
   --color-very-dark: #0c0e16;
   --color-steel-gray: #373b53;
+  --color-steel-gray1: #373b53;
   --color-almost-white: #f8f8fb;
   --color-midnight-gray: #141625;
+  --color-midnight-gray2:#373B53;
+
   --color-white: #ffffff;
   --box-shadow-color: #48549f40;
-  --color-btn-three:#F9FAFE;
+  --color-btn-three: #f9fafe;
   --color-error: #ec5757;
   --color-error-light: #ff9797;
-
+  --button-bg: #ffffff;
   --color-badge-mint-green: hsla(160, 67%, 52%, 0.057);
   --color-badge-steel-gray: hsla(231, 20%, 27%, 0.057);
   --color-badge-amber: hsla(34, 100%, 50%, 0.057);
@@ -103,27 +106,43 @@ h6 {
   --breakpoint-desktop: 1200px;
   --breakpoint-large-desktop: 1440px;
 }
-
-[data-theme="light"] {
-  --background-color: var(--color-almost-white);
-  --text-color: var(--color-very-dark);
-}
-
 [data-theme="dark"] {
-  --background-color: var(--color-midnight-gray);
-  --text-color: var(--color-white);
+  --color-almost-white: #141625;
+  --color-white: #1e2139;
+  --color-muted-blue: #7e88c3;
+  --color-light-gray: #373b53;
+  --color-midnight-gray2: #0C0E16;
+  --color-deep-gray: #1e2139;
+  --color-midnight-gray: #0c0e16;
+  --color-border-gray: #888eb0;
+  --box-shadow-color: #00000040;
+  --color-very-dark: #ffffff;
+  --color-soft-blue: #dfe3fa;
+  --color-btn-three: #252945;
+  --button-bg: #1e2139;
+  --color-badge-steel-gray: rgba(223, 227, 250, 0.055);
+  --color-steel-gray1: #dfe3fa;
 }
 
 body {
   background-color: var(--color-almost-white);
   min-height: 100dvh;
+  color: var(--color-very-dark);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.sidebar__logo-img img{
-  width: 6.5rem ;
-  height: 6.5rem ;
+.sidebar__logo-img img {
+  width: 6.5rem;
+  height: 6.5rem;
 }
 
+input,
+textarea,
+select,
+button {
+  color: var(--color-very-dark);
+  background-color: var(--button-bg);
+}
 
 .loading {
   display: flex;
@@ -131,7 +150,6 @@ body {
   margin-top: 10rem;
   align-items: center;
 }
-
 
 .loader {
   width: 48px;
@@ -190,9 +208,9 @@ body {
   }
 }
 
-
 @media screen and (min-width: 992px) {
-  .sidebar__logo-img img{
-  width: auto;
-  height: auto ;
-}}
+  .sidebar__logo-img img {
+    width: auto;
+    height: auto;
+  }
+}
