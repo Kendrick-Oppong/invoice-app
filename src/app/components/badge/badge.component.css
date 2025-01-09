@@ -47,5 +47,5 @@
 
 .badge--draft {
   background-color: var(--color-badge-steel-gray);
-  color: var(--color-steel-gray);
+  color: var(--color-steel-gray1);
 }
