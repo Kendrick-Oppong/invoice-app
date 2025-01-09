@@ -7,9 +7,9 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideState, provideStore } from '@ngrx/store';
-import { provideEffects } from '@ngrx/effects';;
+import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient } from '@angular/common/http';
-import { InvoiceFeature } from './store/reducers';
+import { InvoiceFeature, themeFeature } from './store/reducers';
 import { InvoiceEffects } from './store/invoice.effects';
 
 export const appConfig: ApplicationConfig = {
@@ -19,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore(),
     provideState(InvoiceFeature),
+    provideState(themeFeature),
     provideEffects(InvoiceEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
