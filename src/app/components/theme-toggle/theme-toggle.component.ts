@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { ICONS } from '@constants/index';
 import { IconComponent } from '@components/icon/icon.component';
-import { ThemeService } from '@app/services/theme/theme.service';
 import { selectIsDarkTheme } from '@app/store/reducers';
 import { Store } from '@ngrx/store';
+import { ThemeService } from '@app/services/theme/theme.service';
 
 @Component({
   selector: 'app-theme-toggle',
@@ -18,7 +18,6 @@ export class ThemeToggleComponent {
   readonly iconData = ICONS;
   isDarkMode = this.store.selectSignal(selectIsDarkTheme);
 
-  // Toggle theme on button click
   toggleTheme(): void {
     this.themeService.toggleTheme();
   }
