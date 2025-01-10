@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
@@ -9,4 +9,5 @@ import { NgTemplateOutlet } from '@angular/common';
   styleUrl: './button.component.css',
 })
 export class ButtonComponent {
+  @Input() onClick: () => void = () => {};
 }

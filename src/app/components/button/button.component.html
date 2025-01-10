@@ -1,6 +1,6 @@
 
 <ng-template #content><ng-content></ng-content></ng-template>
 
-<button type="button">
+<button type="button" (click)="onClick()">
   <ng-container [ngTemplateOutlet]="content"></ng-container>
 </button>
