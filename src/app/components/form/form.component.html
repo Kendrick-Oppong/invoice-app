@@ -1,6 +1,8 @@
+
 <form
   [formGroup]="invoiceForm"
   class="form"
+  [class.form--slide-in]="isShowAddInvoiceForm()"
   novalidate
   (ngSubmit)="onSubmit()"
   class="form"
@@ -325,44 +327,6 @@
         <app-icon [iconData]="icons.bin"></app-icon>
       </div>
 
-      <!-- Second Item Row -->
-      <!-- <div class="item-list__row">
-        <app-text-field
-          class="item-list__input-first"
-          [fieldProps]="{
-            id: 'itemName',
-            name: 'itemName',
-            type: 'text',
-            class: 'form__input item-list__input      item-list__input-first'
-          }"
-          controlName="itemName"
-        />
-
-        <app-text-field
-          [fieldProps]="{
-            id: 'quantity',
-            name: 'quantity',
-            type: 'number',
-            class: 'form__input item-list__input'
-          }"
-          controlName="quantity"
-        />
-        <app-text-field
-          [fieldProps]="{
-            id: 'price',
-            name: 'price',
-            type: 'number',
-            class: 'form__input item-list__input'
-          }"
-          controlName="price"
-        />
-
-        <app-headline variant="h3" class="item-list__total"
-          >400.00</app-headline
-        >
-        <app-icon [iconData]="icons.bin"></app-icon>
-      </div> -->
-
       <!-- Add New Item Button -->
       <div class="add-btn-container">
         <button type="submit">+ Add new Item</button>
@@ -376,7 +340,10 @@
 
   <div class="cta_container">
     <div class="invoice__actions-mod" role="group" aria-label="Invoice actions">
-      <app-button class="invoice__button invoice__button--discard">
+      <app-button
+        (click)="toggleAddInvoiceForm()"
+        class="invoice__button invoice__button--discard"
+      >
         <p>Discard</p></app-button
       >
       <div class="save_draft">
@@ -390,3 +357,4 @@
     </div>
   </div>
 </form>
+

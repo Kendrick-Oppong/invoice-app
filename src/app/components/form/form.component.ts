@@ -11,6 +11,7 @@ import { IconComponent } from '@components/icon/icon.component';
 import { CommonModule } from '@angular/common';
 import { DatePickerComponent } from '@components/date-picker/date-picker.component';
 import { DropdownComponent } from '@components/dropdown/dropdown.component';
+import { invoiceActions } from '@app/store/actions';
 
 @Component({
   selector: 'app-form',
@@ -24,8 +25,8 @@ import { DropdownComponent } from '@components/dropdown/dropdown.component';
     IconComponent,
     CommonModule,
     DatePickerComponent,
-    DropdownComponent
-],
+    DropdownComponent,
+  ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
@@ -40,64 +41,11 @@ export class FormComponent {
   // Get field error state to style input border
   isFieldError(field: string): boolean {
     const control = this.invoiceForm.get(field);
-    return ((control?.invalid && control?.touched) ||
-      this.isFormSubmitted) as boolean;
+    return (control?.invalid && control?.touched) || this.isFormSubmitted;
   }
-
-  // Method to retrieve error messages for each field
-  // getErrorMessage(field: string): string {
-  //   const control = this.invoiceForm.get(field);
-
-  //   if (control?.hasError('required')) {
-  //     return `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`;
-  //   }
-  //   if (control?.hasError('minlength')) {
-  //     const minLength = control.getError('minlength').requiredLength;
-  //     return `${
-  //       field.charAt(0).toUpperCase() + field.slice(1)
-  //     } must be at least ${minLength} characters long.`;
-  //   }
-  //   if (control?.hasError('email')) {
-  //     return 'Enter a valid email address.';
-  //   }
-  //   if (control?.hasError('pattern')) {
-  //     if (field === 'phone') {
-  //       return 'Phone number must be 10 digits long.';
-  //     }
-  //   }
-  //   return '';
-  // }
-
-  // onSubmit() {
-  // Mark all form controls as touched so that validation is triggered
-  // Object.keys(this.invoiceForm.controls).forEach((control) => {
-  //   const controlInstance = this.invoiceForm.get(control);
-  //   if (controlInstance) {
-  //     controlInstance.markAsTouched();
-  //     controlInstance.updateValueAndValidity();
-  //   }
-  // });
-
-  // Check if the form is valid before proceeding
-  //   if (this.invoiceForm.valid) {
-  //     console.log(this.invoiceForm.value)
-  //     // Proceed with form submission logic
-  //   } else {
-  //     // Handle form submission error
-  //     console.log('Form is invalid');
-  //   }
-  // }
-
-  // onSubmit() {
-  //   this.submitted = true;
-  //   if (this.invoiceForm.valid) {
-  //     console.log('InvoiceForm Submitted:', this.invoiceForm.value);
-  //   }
-  // }
 
   invoiceForm = this.fb.group({
     createdAt: ['', [Validators.required, Validators.min(2)]],
-    // paymentDue: ['', [Validators.required, Validators.min(2)]],
     description: ['', [Validators.required, Validators.min(2)]],
     paymentTerms: ['', [Validators.required, Validators.min(1)]],
     clientName: ['', [Validators.required, Validators.min(2)]],
@@ -125,6 +73,10 @@ export class FormComponent {
     total: [0],
   });
 
+  toggleAddInvoiceForm(): void {
+    this.store.dispatch(invoiceActions.showAddInvoiceForm());
+  }
+
   onSubmit() {
     this.isFormSubmitted = true;
     Object.keys(this.invoiceForm.controls).forEach((control) => {
@@ -135,9 +87,7 @@ export class FormComponent {
       }
     });
 
-    
-      console.log(this.invoiceForm.value)
-      // Proceed with form submission logic
-    
+    console.log(this.invoiceForm.value);
+    // Proceed with form submission logic
   }
 }
