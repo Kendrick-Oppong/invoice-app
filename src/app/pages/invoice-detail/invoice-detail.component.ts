@@ -40,8 +40,6 @@ export class InvoiceDetailComponent implements OnInit {
       return;
     }
 
-    this.store.dispatch(invoiceActions.loadInvoices());
-
     this.invoices$.subscribe((invoices) => {
       this.invoiceDetail = invoices.find(
         (invoice) => invoice.id === this.invoiceId
