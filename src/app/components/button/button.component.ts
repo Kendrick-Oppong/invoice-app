@@ -10,4 +10,5 @@ import { NgTemplateOutlet } from '@angular/common';
 })
 export class ButtonComponent {
   @Input() onClick: () => void = () => {};
+  @Input() type: 'button' | 'submit' = 'button';
 }
