@@ -3,23 +3,47 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap, of, delay } from 'rxjs';
 import { invoiceActions } from '@app/store/actions';
 import { InvoicesService } from '@app/services/invoices/invoices.service';
+import { LocalStorageService } from '@app/services/localstorage/local-storage.service';
+import { Invoice } from '@interfaces/index';
 
 @Injectable()
 export class InvoiceEffects {
-  private actions$: Actions = inject(Actions);
-  private invoicesService = inject(InvoicesService);
+  private readonly actions$: Actions = inject(Actions);
+  private readonly invoicesService: InvoicesService = inject(InvoicesService);
+  private readonly localStorageService: LocalStorageService =
+    inject(LocalStorageService);
 
-  // Effect to load invoices
   loadInvoices$ = createEffect(() =>
     this.actions$.pipe(
       ofType(invoiceActions.loadInvoices),
-      switchMap(() =>
-        this.invoicesService.getInvoices().pipe(
+      switchMap(() => {
+        // Check if invoices are already present in the store or localStorage
+        const invoicesFromStorage =
+          this.localStorageService.getItem<Invoice[]>('invoices');
+        const invoicesInitialized = this.localStorageService.getItem<boolean>(
+          'invoicesInitialized'
+        );
+
+        // If there are invoices in storage and the flag is set, don't fetch
+        if (invoicesFromStorage && invoicesInitialized) {
+          return of(
+            invoiceActions.loadInvoicesSuccess({
+              invoices: invoicesFromStorage,
+            })
+          );
+        }
+
+        // If not initialized, fetch from the JSON file
+        return this.invoicesService.getInvoices().pipe(
           delay(1000),
           map((invoices) => {
             if (invoices.length === 0) {
               throw new Error('No invoices available');
             }
+            // Store the fetched invoices and set the initialization flag
+            this.localStorageService.setItem('invoices', invoices);
+            this.localStorageService.setItem('invoicesInitialized', true);
+
             return invoiceActions.loadInvoicesSuccess({ invoices });
           }),
           catchError((error) =>
@@ -29,8 +53,8 @@ export class InvoiceEffects {
               })
             )
           )
-        )
-      )
+        );
+      })
     )
   );
 
