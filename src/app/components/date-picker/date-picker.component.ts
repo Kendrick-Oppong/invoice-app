@@ -108,11 +108,12 @@ import {
   NG_VALUE_ACCESSOR,
   FormsModule,
 } from '@angular/forms';
+import { ButtonComponent } from "../button/button.component";
 
 @Component({
   selector: 'app-date-picker',
   standalone: true,
-  imports: [CommonModule, IconComponent, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, IconComponent, ReactiveFormsModule, FormsModule, ButtonComponent],
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.css'],
   viewProviders: [

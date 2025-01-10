@@ -61,13 +61,13 @@
 
   <div class="date-picker-popup" *ngIf="isDatePickerOpen">
     <div class="date-picker-header">
-      <button type="button" (click)="previousMonth()">
+      <app-button type="button" (click)="previousMonth()">
         <app-icon [iconData]="icons.carretLeft" />
-      </button>
+      </app-button>
       <span>{{ currentMonth | date : "MMM yyyy" }}</span>
-      <button type="button" (click)="nextMonth()">
+      <app-button type="button" (click)="nextMonth()">
         <app-icon [iconData]="icons.carretRight" />
-      </button>
+      </app-button>
     </div>
     <div class="date-picker-grid">
       <span *ngFor="let day of daysOfWeek">{{ day }}</span>
