@@ -5,11 +5,13 @@ import { invoiceActions } from '@app/store/actions';
 import { InvoicesService } from '@app/services/invoices/invoices.service';
 import { LocalStorageService } from '@app/services/localstorage/local-storage.service';
 import { Invoice } from '@interfaces/index';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class InvoiceEffects {
   private readonly actions$: Actions = inject(Actions);
   private readonly invoicesService: InvoicesService = inject(InvoicesService);
+  private readonly store: Store = inject(Store);
   private readonly localStorageService: LocalStorageService =
     inject(LocalStorageService);
 
@@ -65,9 +67,25 @@ export class InvoiceEffects {
       switchMap(({ invoice }) =>
         this.invoicesService.addInvoice(invoice).pipe(
           delay(1000),
-          map((newInvoice) =>
-            invoiceActions.addInvoiceSuccess({ invoice: newInvoice })
-          ),
+          map((newInvoice) => {
+            // Add the new invoice to localStorage after successful addition
+            const updatedInvoices = [
+              ...(this.localStorageService.getItem<Invoice[]>('invoices') ||
+                []),
+              newInvoice,
+            ];
+            this.localStorageService.setItem('invoices', updatedInvoices);
+
+            // Dispatch success action
+            this.store.dispatch(
+              invoiceActions.addInvoiceSuccess({ invoice: newInvoice })
+            );
+
+            // Dispatch the loadInvoices action to refetch the invoices
+            this.store.dispatch(invoiceActions.loadInvoices());
+
+            return invoiceActions.addInvoiceSuccess({ invoice: newInvoice });
+          }),
           catchError((error) =>
             of(invoiceActions.addInvoiceFailure({ error: error.message }))
           )
