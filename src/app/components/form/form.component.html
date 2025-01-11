@@ -181,16 +181,7 @@
             }"
             controlName="createdAt"
           />
-          <!-- <app-text-field
-            class="form__input"
-            [fieldProps]="{
-              id: 'invoiceDate',
-              name: 'createdAt',
-              type: 'date',
-              class: 'form__input'
-            }"
-            controlName="createdAt"
-          /> -->
+       
         </div>
       </div>
 
@@ -329,7 +320,7 @@
 
       <!-- Add New Item Button -->
       <div class="add-btn-container">
-        <button type="submit">+ Add new Item</button>
+        <button type="button">+ Add new Item</button>
       </div>
 
       <p *ngIf="isFormSubmitted && invoiceForm.invalid" class="form__error">
@@ -350,11 +341,12 @@
         <app-button class="invoice__button invoice__button--draft"
           >Save as Draft</app-button
         >
-        <app-button class="invoice__button invoice__button--save"
+        <app-button
+          type="submit"
+          class="invoice__button invoice__button--save"
           >Save &amp; Send</app-button
         >
       </div>
     </div>
   </div>
 </form>
-

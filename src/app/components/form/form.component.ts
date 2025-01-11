@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { DatePickerComponent } from '@components/date-picker/date-picker.component';
 import { DropdownComponent } from '@components/dropdown/dropdown.component';
 import { invoiceActions } from '@app/store/actions';
+import { InvoicesService } from '@app/services/invoices/invoices.service';
 
 @Component({
   selector: 'app-form',
@@ -33,6 +34,7 @@ import { invoiceActions } from '@app/store/actions';
 export class FormComponent {
   private readonly store: Store = inject(Store);
   private readonly fb = inject(FormBuilder);
+  private readonly invoicesService: InvoicesService = inject(InvoicesService);
   isShowAddInvoiceForm = this.store.selectSignal(selectShowAddInvoiceForm);
   icons = ICONS;
   isFormSubmitted = false;
@@ -87,7 +89,14 @@ export class FormComponent {
       }
     });
 
-    console.log(this.invoiceForm.value);
-    // Proceed with form submission logic
+
+    if (this.invoiceForm.valid) {
+      const newInvoice = this.invoicesService.createInvoice(this.invoiceForm);
+      console.log('newInvoice', newInvoice);
+
+      this.invoicesService.addInvoice(newInvoice).subscribe((invoice) => {
+        this.store.dispatch(invoiceActions.addInvoice({ invoice }));
+      });
+    }
   }
 }
