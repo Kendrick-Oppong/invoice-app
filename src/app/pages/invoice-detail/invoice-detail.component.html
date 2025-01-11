@@ -100,7 +100,9 @@
           <app-text class="invoice-summary__label" variant="p"
             >Bill To</app-text
           >
-          <app-headline variant="h2">{{ invoice.clientName }}</app-headline>
+          <app-headline variant="h2">{{
+            invoice.clientName | titlecase
+          }}</app-headline>
           <app-text class="invoice-summary__address-line" variant="p">{{
             invoice.clientAddress.street
           }}</app-text>
@@ -120,7 +122,9 @@
           <app-text class="invoice-summary__label" variant="p"
             >Sent to</app-text
           >
-          <app-headline variant="h2">{{ invoice.clientEmail }}</app-headline>
+          <app-headline variant="h2">{{
+            invoice.clientEmail | lowercase
+          }}</app-headline>
         </div>
       </div>
     </div>

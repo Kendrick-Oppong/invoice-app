@@ -15,7 +15,7 @@
       </app-text>
 
       <app-text variant="p" class="invoice-card__name">
-        <span aria-label="Client Name">{{ invoice().clientName }} </span>
+        <span aria-label="Client Name">{{ invoice().clientName | titlecase }} </span>
       </app-text>
 
       <app-headline variant="h3" class="invoice-card__title">
@@ -43,7 +43,7 @@
     </div>
     <div class="invoice-layout">
       <app-text variant="p" class="invoice-card__name">
-        <span aria-label="Client Name">{{ invoice().clientName }} </span>
+        <span aria-label="Client Name">{{ invoice().clientName | titlecase }} </span>
       </app-text>
       <app-badge [status]="invoice().status" />
     </div>

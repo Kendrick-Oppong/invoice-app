@@ -6,6 +6,7 @@ import { IconComponent } from '@components/icon/icon.component';
 import { BadgeComponent } from '@components/badge/badge.component';
 import { Invoice } from '@interfaces/index';
 import { RouterLink } from '@angular/router';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-invoice-card',
@@ -16,6 +17,7 @@ import { RouterLink } from '@angular/router';
     IconComponent,
     BadgeComponent,
     RouterLink,
+    TitleCasePipe
   ],
   templateUrl: './invoice-card.component.html',
   styleUrl: './invoice-card.component.css',

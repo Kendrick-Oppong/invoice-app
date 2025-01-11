@@ -8,9 +8,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectInvoices } from '@app/store/reducers';
 import { Invoice } from '@interfaces/index';
-import { invoiceActions } from '@app/store/actions';
 import { ICONS } from '@constants/index';
 import { IconComponent } from '@components/icon/icon.component';
+import { TitleCasePipe,LowerCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -22,6 +22,8 @@ import { IconComponent } from '@components/icon/icon.component';
     HeadlineComponent,
     IconComponent,
     RouterLink,
+    TitleCasePipe,
+    LowerCasePipe,
   ],
   templateUrl: './invoice-detail.component.html',
   styleUrls: ['./invoice-detail.component.css'],
