@@ -38,7 +38,7 @@ a {
 }
 
 .invoice-layout .invoice-card__name {
-    text-align: right;
+  text-align: right;
 }
 
 @media screen and (min-width: 768px) {
@@ -46,9 +46,13 @@ a {
     display: none;
   }
   .invoice-id {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) 4rem;
     width: 100%;
     justify-content: space-between;
     align-items: center;
+  }
+  .invoice-card__status {
+    justify-self: end;
   }
 }

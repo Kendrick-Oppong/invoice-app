@@ -106,6 +106,10 @@ section {
   border-bottom-right-radius: 0.8rem;
 }
 
+.invoice-table__amount span {
+  color: white !important;
+}
+
 .invoice-table__amount-label span {
   color: white !important;
 }

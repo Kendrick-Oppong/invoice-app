@@ -20,25 +20,26 @@
     </div>
     <div class="invoice__actions" role="group" aria-label="Invoice actions">
       <app-button
+        (click)="toggleAddInvoiceForm()"
         class="invoice__button invoice__button--edit"
         aria-label="Edit the invoice"
       >
         <p>Edit</p>
       </app-button>
       <app-button
+        (click)="showDialog()"
         class="invoice__button invoice__button--delete"
-        variant="btn_five"
         aria-label="Delete the invoice"
       >
         Delete
       </app-button>
       <app-button
+        (click)="markAsPaid()"
         class="invoice__button invoice__button--mark-paid"
-        variant="btn_two"
         aria-label="Mark the invoice as paid"
       >
-        Mark as Paid</app-button
-      >
+        Mark as Paid
+      </app-button>
     </div>
   </div>
 </section>
@@ -177,12 +178,13 @@
       <app-text class="invoice-table__amount-label" variant="p"
         ><span>Grand Total</span></app-text
       >
-      <app-headline class="invoice-table__amount" variant="h1"
-        >£ {{ invoice.total }}</app-headline
+      <app-headline class="invoice-table__amount" variant="h1">
+        <span>£ {{ invoice.total }}</span></app-headline
       >
     </div>
   </section>
 </div>
+<app-form [invoiceDetail]="invoiceDetail" />
 }@else {
 <div class="loading">
   <span class="loader"></span>
@@ -205,6 +207,7 @@
       >Delete</app-button
     >
     <app-button
+      (click)="markAsPaid()"
       class="invoice__button invoice__button--mark-paid"
       variant="btn_one"
       aria-label="Mark the invoice as paid"
@@ -212,5 +215,6 @@
     >
   </div>
 </div>
-
-}
+@if (showDialogue()) {
+<app-dialog [(showDialoguePopup)]="showDialogue" [invoiceId]="invoiceId" />
+} }
