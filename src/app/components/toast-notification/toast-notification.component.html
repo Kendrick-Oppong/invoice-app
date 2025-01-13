@@ -1,0 +1,11 @@
+<div
+  *ngIf="notification$ | async as notification"
+  class="notification"
+  [ngClass]="{
+    success: notification.toastType === 'success',
+    error: notification.toastType === 'error',
+    info: notification.toastType === 'info'
+  }"
+>
+  <app-headline><span>{{notification.message}}</span></app-headline>
+</div>
