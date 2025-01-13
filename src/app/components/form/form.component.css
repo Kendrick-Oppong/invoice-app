@@ -165,7 +165,7 @@ input[type="email"] {
   border-radius: 2.4rem;
 }
 
-.ng-touched.ng-invalid {
+.validate-mod.ng-touched.ng-invalid {
   border: 1px solid var(--color-error) !important;
 }
 

@@ -1,17 +1,16 @@
-
 <form
   [formGroup]="invoiceForm"
   class="form"
   [class.form--slide-in]="isShowAddInvoiceForm()"
   novalidate
   (ngSubmit)="onSubmit()"
-  class="form"
   aria-labelledby="form-heading"
 >
   <div class="form__container">
     <app-headline variant="h2" id="form-heading" class="form__headline"
       >New Invoice</app-headline
     >
+
     <!-- Bill From Section -->
     <div class="form__section">
       <app-headline class="form__section-title">Bill From</app-headline>
@@ -24,8 +23,7 @@
             id: 'fromStreet',
             name: 'senderStreet',
             type: 'text',
-            class: 'form__input',
-
+            class: 'form__input'
           }"
           controlName="senderStreet"
         />
@@ -40,7 +38,7 @@
               id: 'fromCity',
               name: 'senderCity',
               type: 'text',
-              class: 'form__input',
+              class: 'form__input'
             }"
             controlName="senderCity"
           />
@@ -54,7 +52,7 @@
               id: 'fromPostCode',
               name: 'senderPostCode',
               type: 'text',
-              class: 'form__input',
+              class: 'form__input'
             }"
             controlName="senderPostCode"
           />
@@ -121,6 +119,7 @@
           controlName="clientStreet"
         />
       </div>
+
       <div class="form__group form__group--inline">
         <div class="form__input-wrapper">
           <label for="city" class="form__label">City</label>
@@ -181,7 +180,6 @@
             }"
             controlName="createdAt"
           />
-       
         </div>
       </div>
 
@@ -204,7 +202,7 @@
           id: 'projectDescription',
           name: 'description',
           type: 'text',
-          class: 'form__input item-list__input item-list__input-first'
+          class: 'form__input'
         }"
         controlName="description"
       />
@@ -219,52 +217,58 @@
 
     <!-- mobile -->
     <div class="mod-mobile">
-      <div class="form__group">
-        <label for="itemName" class="form__label">Item Name</label>
-        <app-text-field
-          class="form__input"
-          [fieldProps]="{
-            id: 'itemName',
-            name: 'name',
-            type: 'text',
-            class: 'form__input item-list__input item-list__input-first'
-          }"
-          controlName="itemName"
-        />
-      </div>
-      <div class="item-list-mod">
-        <div class="item-list__header-mod">
-          <app-text variant="p">Qty.</app-text>
-          <app-text variant="p">Price</app-text>
-          <app-text variant="p">Total</app-text>
-        </div>
+      <div formArrayName="items">
+        <div
+          *ngFor="let item of items.controls; let i = index"
+          [formGroupName]="i"
+          class="item-list-mod"
+        >
+          <div class="form__group">
+            <label [for]="'itemName_' + i" class="form__label">Item Name</label>
+            <input
+              id="itemName_{{ i }}"
+              name="name"
+              type="text"
+              class="form__input item-list__input item-list__input-first validate-mod"
+              formControlName="name"
+            />
+          </div>
 
-        <!-- First Item Row -->
-        <div class="item-list__row-mod">
-          <app-text-field
-            [fieldProps]="{
-              id: 'quantity',
-              name: 'itemQuantity',
-              type: 'text',
-              class: 'form__input item-list__input'
-            }"
-            controlName="itemQuantity"
-          />
+          <div class="item-list__header-mod">
+            <app-text variant="p">Qty.</app-text>
+            <app-text variant="p">Price</app-text>
+            <app-text variant="p">Total</app-text>
+          </div>
 
-          <app-text-field
-            [fieldProps]="{
-              id: 'price',
-              name: 'itemPrice',
-              type: 'number',
-              class: 'form__input item-list__input'
-            }"
-            controlName="itemPrice"
-          />
+          <div class="item-list__row-mod">
+            <input
+              id="quantity_{{ i }}"
+              name="quantity"
+              type="number"
+              min="1"
+              class="form__input item-list__input validate-mod"
+              formControlName="quantity"
+              (blur)="calculateItemTotal(i)"
+            />
 
-          <app-headline variant="h3" class="item-list__total"
-            >156.00</app-headline
-          >
-          <app-icon [iconData]="icons.bin"></app-icon>
+            <input
+              id="price_{{ i }}"
+              name="price"
+              type="number"
+              min="1"
+              class="form__input item-list__input validate-mod"
+              formControlName="price"
+              (blur)="calculateItemTotal(i)"
+            />
+
+            <app-headline variant="h3" class="item-list__total">
+              {{ item.get("total")?.value | number : "1.2-2" }}
+            </app-headline>
+
+            <div role="button" (click)="items.length !== 1 && removeItem(i)">
+              <app-icon [iconData]="icons.bin"></app-icon>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -278,49 +282,52 @@
         <app-text variant="p">Total</app-text>
       </div>
 
-      <!-- First Item Row -->
-
-      <div class="item-list__row">
-        <app-text-field
-          class="item-list__input-first"
-          [fieldProps]="{
-            id: 'itemName',
-            name: 'name',
-            type: 'text',
-            class: 'form__input item-list__input item-list__input-first'
-          }"
-          controlName="itemName"
-        />
-
-        <app-text-field
-          [fieldProps]="{
-            id: 'quantity',
-            name: 'itemQuantity',
-            type: 'text',
-            class: 'form__input item-list__input'
-          }"
-          controlName="itemQuantity"
-        />
-
-        <app-text-field
-          [fieldProps]="{
-            id: 'price',
-            name: 'itemPrice',
-            type: 'number',
-            class: 'form__input item-list__input'
-          }"
-          controlName="itemPrice"
-        />
-
-        <app-headline variant="h3" class="item-list__total"
-          >156.00</app-headline
+      <div formArrayName="items">
+        <div
+          *ngFor="let item of items.controls; let i = index"
+          [formGroupName]="i"
+          class="item-list__row"
         >
-        <app-icon [iconData]="icons.bin"></app-icon>
-      </div>
+          <input
+            id="itemName_{{ i }}"
+            name="name"
+            type="text"
+            class="form__input item-list__input item-list__input-first validate-mod"
+            formControlName="name"
+          />
 
+          <input
+            id="quantity_{{ i }}"
+            name="quantity"
+            type="number"
+            min="1"
+            class="form__input item-list__input validate-mod"
+            formControlName="quantity"
+            (blur)="calculateItemTotal(i)"
+          />
+
+          <input
+            id="price_{{ i }}"
+            name="price"
+            type="number"
+            min="1"
+            class="form__input item-list__input validate-mod"
+            formControlName="price"
+            (blur)="calculateItemTotal(i)"
+          />
+
+          <app-headline variant="h3" class="item-list__total">
+            {{ item.get("total")?.value | number : "1.2-2" }}
+          </app-headline>
+
+          <div (click)="items.length !== 1 && removeItem(i)">
+            <app-icon [iconData]="icons.bin"></app-icon>
+          </div>
+        </div>
+      </div>
       <!-- Add New Item Button -->
       <div class="add-btn-container">
-        <button type="button">+ Add new Item</button>
+        <button type="button" (click)="addNewItem()">+ Add New Item</button>
       </div>
 
       <p *ngIf="isFormSubmitted && invoiceForm.invalid" class="form__error">
@@ -335,17 +342,18 @@
         (click)="toggleAddInvoiceForm()"
         class="invoice__button invoice__button--discard"
       >
-        <p>Discard</p></app-button
-      >
+        <p>Discard</p>
+      </app-button>
       <div class="save_draft">
-        <app-button class="invoice__button invoice__button--draft"
-          >Save as Draft</app-button
-        >
         <app-button
-          type="submit"
-          class="invoice__button invoice__button--save"
-          >Save &amp; Send</app-button
+          (click)="saveAsDraft()"
+          class="invoice__button invoice__button--draft"
         >
+          Save as Draft
+        </app-button>
+        <app-button type="submit" class="invoice__button invoice__button--save">
+          Save &amp; Send
+        </app-button>
       </div>
     </div>
   </div>
