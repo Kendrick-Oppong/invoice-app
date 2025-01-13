@@ -1,1 +1,18 @@
-<p>dialog works!</p>
+<div class="dialog">
+  <div class="dialog__content">
+    <h2 class="dialog__title">Confirm Deletion</h2>
+    <p class="dialog__text">
+      Are you sure you want to delete invoice <strong>#{{ invoiceId }}</strong
+      >?
+    </p>
+
+    <div class="dialog__actions">
+      <button (click)="showDialog()" class="button button--cancel">
+        Cancel
+      </button>
+      <button (click)="deleteInvoice()" class="button button--delete">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
