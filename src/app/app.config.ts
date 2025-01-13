@@ -9,7 +9,11 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient } from '@angular/common/http';
-import { InvoiceFeature, themeFeature } from './store/reducers';
+import {
+  InvoiceFeature,
+  notificationFeature,
+  themeFeature,
+} from './store/reducers';
 import { InvoiceEffects } from './store/invoice.effects';
 
 export const appConfig: ApplicationConfig = {
@@ -20,6 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideState(InvoiceFeature),
     provideState(themeFeature),
+    provideState(notificationFeature),
     provideEffects(InvoiceEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
