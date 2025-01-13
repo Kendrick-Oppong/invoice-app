@@ -22,6 +22,7 @@ export const invoiceActions = createActionGroup({
 
     'Filter Invoices': props<{ statuses: string[] }>(),
     'Show Add Invoice Form': emptyProps(),
+    'Mark Invoice As Paid': props<{ id: string }>(),
   },
 });
 
@@ -29,5 +30,16 @@ export const themeActions = createActionGroup({
   source: 'Theme',
   events: {
     'Toggle Theme': emptyProps(),
+  },
+});
+
+export const notificationActions = createActionGroup({
+  source: 'Notification',
+  events: {
+    'Show Notification': props<{
+      message: string;
+      toastType: 'success' | 'error' | 'info';
+    }>(),
+    'Clear Notification': emptyProps(),
   },
 });

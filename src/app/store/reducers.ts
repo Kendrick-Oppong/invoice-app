@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { InvoiceState } from '@interfaces/index';
-import { invoiceActions, themeActions } from './actions';
+import { InvoiceState, NotificationState } from '@interfaces/index';
+import { invoiceActions, notificationActions, themeActions } from './actions';
 import { produce } from 'immer';
 
 const initialState: InvoiceState = {
@@ -44,7 +44,7 @@ export const InvoiceFeature = createFeature({
     ),
     on(invoiceActions.addInvoiceSuccess, (state, { invoice }) =>
       produce(state, (draft) => {
-        draft.invoices.push(invoice);
+        draft.invoices.unshift(invoice);
         draft.loading = false;
       })
     ),
@@ -69,7 +69,7 @@ export const InvoiceFeature = createFeature({
         if (index !== -1) {
           draft.invoices[index] = invoice;
         }
-        draft.loading = false;
+          draft.loading = false;
       })
     ),
     on(invoiceActions.updateInvoiceFailure, (state, { error }) =>
@@ -88,6 +88,9 @@ export const InvoiceFeature = createFeature({
     on(invoiceActions.deleteInvoiceSuccess, (state, { id }) =>
       produce(state, (draft) => {
         draft.invoices = draft.invoices.filter((item) => item.id !== id);
+        draft.filteredInvoices = draft.filteredInvoices.filter(
+          (item) => item.id !== id
+        );
         draft.loading = false;
       })
     ),
@@ -111,6 +114,15 @@ export const InvoiceFeature = createFeature({
     on(invoiceActions.showAddInvoiceForm, (state) =>
       produce(state, (draft) => {
         draft.showAddInvoiceForm = !draft.showAddInvoiceForm;
+      })
+    ),
+    on(invoiceActions.markInvoiceAsPaid, (state, { id }) =>
+      produce(state, (draft) => {
+        const index = draft.invoices.findIndex((invoice) => invoice.id === id);
+        if (index !== -1) {
+          draft.invoices[index].status = 'paid';
+        }
+        draft.loading = false;
       })
     )
   ),
@@ -141,3 +153,38 @@ export const themeFeature = createFeature({
 });
 
 export const { selectIsDarkTheme } = themeFeature;
+
+const initialNotificationState: NotificationState = {
+  message: '',
+  toastType: null,
+  show: false,
+};
+
+export const notificationFeature = createFeature({
+  name: 'notification',
+  reducer: createReducer(
+    initialNotificationState,
+    on(notificationActions.showNotification, (state, { message, toastType }) =>
+      produce(state, (draft) => {
+        draft.message = message;
+        draft.toastType = toastType;
+        draft.show = true;
+      })
+    ),
+
+    on(notificationActions.clearNotification, (state) =>
+      produce(state, (draft) => {
+        draft.message = '';
+        draft.toastType = null;
+        draft.show = false;
+      })
+    )
+  ),
+});
+
+export const {
+  selectMessage,
+  selectShow,
+  selectNotificationState,
+  selectToastType,
+} = notificationFeature;

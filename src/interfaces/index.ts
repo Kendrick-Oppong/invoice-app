@@ -55,7 +55,11 @@ export type FieldProps = {
   id: string;
   class:string
 };
-
+export interface NotificationState {
+  message: string;
+  toastType: 'success' | 'error' | 'info' | null;
+  show: boolean;
+}
 export type ButtonType =
   | 'btn_one'
   | 'btn_two'
