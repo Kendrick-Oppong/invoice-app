@@ -1,1 +1,25 @@
-<p>headline works!</p>
+<ng-template #content><ng-content></ng-content></ng-template>
+
+@switch (variant()) {
+  @case ('h1') {
+    <h1 class="heading__One">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </h1>
+  }
+  @case ('h2') {
+    <h2 class="heading__Two">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </h2>
+  }
+   @case ('h3') {
+    <h2 class="heading__Three">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </h2>
+  }
+  @default {
+    <h3 class="heading__default">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </h3>
+  }
+}
+
