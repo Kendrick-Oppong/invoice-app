@@ -136,28 +136,35 @@ export class InvoiceEffects {
   updateInvoice$ = createEffect(() =>
     this.actions$.pipe(
       ofType(invoiceActions.updateInvoice),
-      map(({ id, invoice }) => {
-        const invoices =
-          this.localStorageService.getItem<Invoice[]>('invoices') || [];
+      switchMap(({ id, invoice }) =>
+        of(void 0).pipe(
+          delay(1000),
+          map(() => {
+            const invoices =
+              this.localStorageService.getItem<Invoice[]>('invoices') || [];
 
-        const updatedInvoices = invoices.map((item) =>
-          item.id === id ? { ...item, ...invoice } : item
-        );
+            const updatedInvoices = invoices.map((item) =>
+              item.id === id ? { ...item, ...invoice } : item
+            );
 
-        this.localStorageService.setItem('invoices', updatedInvoices);
+            this.localStorageService.setItem('invoices', updatedInvoices);
 
-        this.store.dispatch(invoiceActions.loadInvoices());
-        this.notificationService.showSuccess('Invoice updated successfully');
+            this.notificationService.showSuccess('Invoice updated successfully');
 
-        this.store.dispatch(invoiceActions.showAddInvoiceForm());
-        return invoiceActions.updateInvoiceSuccess({ invoice });
-      }),
-      catchError((error) => {
-        this.notificationService.showError('Failed to update invoice');
-        return of(
-          invoiceActions.updateInvoiceFailure({ error: error.message })
-        );
-      })
+            // Dispatch loadInvoices action to refresh the list
+            this.store.dispatch(invoiceActions.loadInvoices());
+
+            this.store.dispatch(invoiceActions.showAddInvoiceForm());
+            return invoiceActions.updateInvoiceSuccess({ invoice });
+          }),
+          catchError((error) => {
+            this.notificationService.showError('Failed to update invoice');
+            return of(
+              invoiceActions.updateInvoiceFailure({ error: error.message })
+            );
+          })
+        )
+      )
     )
   );
 

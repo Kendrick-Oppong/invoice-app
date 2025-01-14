@@ -69,13 +69,13 @@ export const InvoiceFeature = createFeature({
         if (index !== -1) {
           draft.invoices[index] = invoice;
         }
-          draft.loading = false;
+        draft.loading = false; 
       })
     ),
     on(invoiceActions.updateInvoiceFailure, (state, { error }) =>
       produce(state, (draft) => {
         draft.error = error;
-        draft.loading = false;
+        draft.loading = false; 
       })
     ),
 

@@ -5,216 +5,153 @@
   </div>
 </a>
 
-@if(invoiceDetail; as invoice){
-<!-- Invoice Header Section -->
-<section class="invoice">
-  <div class="invoice__container">
-    <div class="invoice__header">
-      <app-text variant="p">Status</app-text>
-      <app-badge
-        class="invoice__status-badge invoice__status-badge--{{
-          invoice.status
-        }}"
-        [status]="invoice.status"
-      ></app-badge>
+<div *ngIf="loading(); else invoiceContent">
+  <div class="loading">
+    <span class="loader"></span>
+  </div>
+</div>
+<ng-template #invoiceContent>
+  <ng-container *ngIf="invoiceDetail as invoice">
+  <!-- Invoice Header Section -->
+  <section class="invoice">
+    <div class="invoice__container">
+      <div class="invoice__header">
+        <app-text variant="p">Status</app-text>
+        <app-badge
+          class="invoice__status-badge invoice__status-badge--{{ invoice.status }}"
+          [status]="invoice.status"
+        ></app-badge>
+      </div>
+      <div class="invoice__actions" role="group" aria-label="Invoice actions">
+        <app-button
+          (click)="toggleAddInvoiceForm()"
+          class="invoice__button invoice__button--edit"
+          aria-label="Edit the invoice"
+        >
+          <p>Edit</p>
+        </app-button>
+        <app-button
+          (click)="showDialog()"
+          class="invoice__button invoice__button--delete"
+          aria-label="Delete the invoice"
+        >
+          Delete
+        </app-button>
+        <app-button
+          (click)="markAsPaid()"
+          class="invoice__button invoice__button--mark-paid"
+          aria-label="Mark the invoice as paid"
+        >
+          Mark as Paid
+        </app-button>
+      </div>
     </div>
-    <div class="invoice__actions" role="group" aria-label="Invoice actions">
-      <app-button
-        (click)="toggleAddInvoiceForm()"
-        class="invoice__button invoice__button--edit"
-        aria-label="Edit the invoice"
-      >
+  </section>
+
+  <div class="invoices">
+    <!-- Invoice Details Section -->
+    <section class="invoice-details">
+      <div class="invoice-details__content">
+        <div class="invoice-details__header">
+          <app-headline variant="h2" class="invoice-details__id" id="invoice-id">
+            <span class="invoice-details__hash" aria-hidden="true">#</span>{{ invoice.id }}
+          </app-headline>
+          <app-text class="invoice-details__service" variant="p">{{ invoice.description }}</app-text>
+        </div>
+
+        <div class="invoice-details__address">
+          <app-text class="invoice-details__address-line" variant="p">{{ invoice.senderAddress.street }}</app-text>
+          <app-text class="invoice-details__address--line1" variant="p">{{ invoice.senderAddress.city }}</app-text>
+          <app-text class="invoice-details__address--line2" variant="p">{{ invoice.senderAddress.postCode }}</app-text>
+          <app-text class="invoice-details__address-line" variant="p">{{ invoice.senderAddress.country }}</app-text>
+        </div>
+      </div>
+    </section>
+
+    <!-- Invoice Summary Section -->
+    <section class="invoice-summary">
+      <div class="invoice-summary__content">
+        <div class="invoice-summary__group">
+          <div class="invoice-summary__item">
+            <app-text class="invoice-summary__label" variant="p">Invoice Date</app-text>
+            <app-headline variant="h2" class="invoice-summary__value">{{ invoice.createdAt }}</app-headline>
+          </div>
+          <div class="invoice-summary__item">
+            <app-text class="invoice-summary__label" variant="p">Payment Due</app-text>
+            <app-headline variant="h2" class="invoice-summary__value">{{ invoice.paymentDue }}</app-headline>
+          </div>
+        </div>
+        <div class="invoice-summary__group">
+          <div class="invoice-summary__item">
+            <app-text class="invoice-summary__label" variant="p">Bill To</app-text>
+            <app-headline variant="h2">{{ invoice.clientName | titlecase }}</app-headline>
+            <app-text class="invoice-summary__address-line" variant="p">{{ invoice.clientAddress.street }}</app-text>
+            <app-text class="invoice-summary__address-line" variant="p">{{ invoice.clientAddress.city }}</app-text>
+            <app-text class="invoice-summary__address-line" variant="p">{{ invoice.clientAddress.postCode }}</app-text>
+            <app-text class="invoice-summary__address-line" variant="p">{{ invoice.clientAddress.country }}</app-text>
+          </div>
+        </div>
+        <div class="invoice-summary__group">
+          <div class="invoice-summary__item">
+            <app-text class="invoice-summary__label" variant="p">Sent to</app-text>
+            <app-headline variant="h2">{{ invoice.clientEmail | lowercase }}</app-headline>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Invoice Items Table -->
+    <section class="invoice-table">
+      <div class="invoice-table__content">
+        <div class="invoice-table__header">
+          <app-text class="invoice-table__label" variant="p">Item Name</app-text>
+          <app-text class="invoice-table__label" variant="p">QTY.</app-text>
+          <app-text class="invoice-table__label" variant="p">Price</app-text>
+          <app-text class="invoice-table__label" variant="p">Total</app-text>
+        </div>
+        @for (item of invoice.items; track $index) {
+          <div class="invoice-table__item">
+            <app-headline class="invoice-table__item-name">{{ item.name }}</app-headline>
+            <app-text class="invoice-table__qty" variant="p">{{ item.quantity }}</app-text>
+            <app-text class="invoice-table__price" variant="p">{{ item.price }}</app-text>
+            <app-headline class="invoice-table__total">{{ item.total }}</app-headline>
+          </div>
+
+          <div class="invoice-table__item-2">
+            <div class="invoice-table__item-2-display">
+              <div>
+                <app-headline class="invoice-table__item-name">{{ item.name }}</app-headline>
+                <app-text class="invoice-table__qty" variant="p">{{ item.quantity }}x £{{ item.price }}</app-text>
+              </div>
+              <app-headline class="invoice-table__total">{{ item.total }}</app-headline>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="invoice-table__footer">
+        <app-text class="invoice-table__amount-label" variant="p"><span>Grand Total</span></app-text>
+        <app-headline class="invoice-table__amount" variant="h1"><span>£ {{ invoice.total }}</span></app-headline>
+      </div>
+    </section>
+  </div>
+  <app-form [invoiceDetail]="invoiceDetail" />
+  </ng-container>
+</ng-template>
+@if (invoiceDetail; as invoice) {
+  <div class="invoice__container-mod">
+    <div class="invoice__actions-mod" role="group" aria-label="Invoice actions">
+      <app-button class="invoice__button invoice__button--edit" variant="btn_three" aria-label="Edit the invoice">
         <p>Edit</p>
       </app-button>
-      <app-button
-        (click)="showDialog()"
-        class="invoice__button invoice__button--delete"
-        aria-label="Delete the invoice"
-      >
+      <app-button class="invoice__button invoice__button--delete" variant="btn_five" aria-label="Delete the invoice">
         Delete
       </app-button>
-      <app-button
-        (click)="markAsPaid()"
-        class="invoice__button invoice__button--mark-paid"
-        aria-label="Mark the invoice as paid"
-      >
+      <app-button (click)="markAsPaid()" class="invoice__button invoice__button--mark-paid" variant="btn_one" aria-label="Mark the invoice as paid">
         Mark as Paid
       </app-button>
     </div>
   </div>
-</section>
-
-<div class="invoices">
-  <!-- Invoice Details Section -->
-  <section class="invoice-details">
-    <div class="invoice-details__content">
-      <div class="invoice-details__header">
-        <app-headline variant="h2" class="invoice-details__id" id="invoice-id">
-          <span class="invoice-details__hash" aria-hidden="true">#</span
-          >{{ invoice.id }}
-        </app-headline>
-        <app-text class="invoice-details__service" variant="p">{{
-          invoice.description
-        }}</app-text>
-      </div>
-
-      <div class="invoice-details__address">
-        <app-text class="invoice-details__address-line" variant="p">
-          {{ invoice.senderAddress.street }}</app-text
-        >
-        <app-text class="invoice-details__address--line1" variant="p"
-          >{{ invoice.senderAddress.city }}
-        </app-text>
-        <app-text class="invoice-details__address--line2" variant="p">{{
-          invoice.senderAddress.postCode
-        }}</app-text>
-        <app-text class="invoice-details__address-line" variant="p">{{
-          invoice.senderAddress.country
-        }}</app-text>
-      </div>
-    </div>
-  </section>
-
-  <!-- Invoice Summary Section -->
-  <section class="invoice-summary">
-    <div class="invoice-summary__content">
-      <div class="invoice-summary__group">
-        <div class="invoice-summary__item">
-          <app-text class="invoice-summary__label" variant="p"
-            >Invoice Date</app-text
-          >
-          <app-headline variant="h2" class="invoice-summary__value">{{
-            invoice.createdAt
-          }}</app-headline>
-        </div>
-        <div class="invoice-summary__item">
-          <app-text class="invoice-summary__label" variant="p"
-            >Payment Due</app-text
-          >
-          <app-headline variant="h2" class="invoice-summary__value">{{
-            invoice.paymentDue
-          }}</app-headline>
-        </div>
-      </div>
-      <div class="invoice-summary__group">
-        <div class="invoice-summary__item">
-          <app-text class="invoice-summary__label" variant="p"
-            >Bill To</app-text
-          >
-          <app-headline variant="h2">{{
-            invoice.clientName | titlecase
-          }}</app-headline>
-          <app-text class="invoice-summary__address-line" variant="p">{{
-            invoice.clientAddress.street
-          }}</app-text>
-          <app-text class="invoice-summary__address-line" variant="p">{{
-            invoice.clientAddress.city
-          }}</app-text>
-          <app-text class="invoice-summary__address-line" variant="p">{{
-            invoice.clientAddress.postCode
-          }}</app-text>
-          <app-text class="invoice-summary__address-line" variant="p">{{
-            invoice.clientAddress.country
-          }}</app-text>
-        </div>
-      </div>
-      <div class="invoice-summary__group">
-        <div class="invoice-summary__item">
-          <app-text class="invoice-summary__label" variant="p"
-            >Sent to</app-text
-          >
-          <app-headline variant="h2">{{
-            invoice.clientEmail | lowercase
-          }}</app-headline>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Invoice Items Table -->
-  <section class="invoice-table">
-    <div class="invoice-table-content">
-      <div class="invoice-table__header">
-        <app-text class="invoice-table__label" variant="p">Item Name</app-text>
-        <app-text class="invoice-table__label" variant="p">QTY.</app-text>
-        <app-text class="invoice-table__label" variant="p">Price</app-text>
-        <app-text class="invoice-table__label" variant="p">Total</app-text>
-      </div>
-      @for (item of invoice.items; track $index) {
-
-      <div class="invoice-table__item">
-        <app-headline class="invoice-table__item-name">{{
-          item.name
-        }}</app-headline>
-        <app-text class="invoice-table__qty" variant="p">{{
-          item.quantity
-        }}</app-text>
-        <app-text class="invoice-table__price" variant="p">{{
-          item.price
-        }}</app-text>
-        <app-headline class="invoice-table__total">{{
-          item.total
-        }}</app-headline>
-      </div>
-
-      <div class="invoice-table__item-2">
-        <div class="invoice-table__item-2-display">
-          <div>
-            <app-headline class="invoice-table__item-name">{{
-              item.name
-            }}</app-headline>
-            <app-text class="invoice-table__qty" variant="p"
-              >{{ item.quantity }}x £{{ item.price }}</app-text
-            >
-          </div>
-          <app-headline class="invoice-table__total">
-            {{ item.total }}
-          </app-headline>
-        </div>
-      </div>
-      }
-    </div>
-    <div class="invoice-table__footer">
-      <app-text class="invoice-table__amount-label" variant="p"
-        ><span>Grand Total</span></app-text
-      >
-      <app-headline class="invoice-table__amount" variant="h1">
-        <span>£ {{ invoice.total }}</span></app-headline
-      >
-    </div>
-  </section>
-</div>
-<app-form [invoiceDetail]="invoiceDetail" />
-}@else {
-<div class="loading">
-  <span class="loader"></span>
-</div>
-} @if (invoiceDetail; as invoice) {
-
-<div class="invoice__container-mod">
-  <div class="invoice__actions-mod" role="group" aria-label="Invoice actions">
-    <app-button
-      class="invoice__button invoice__button--edit"
-      variant="btn_three"
-      aria-label="Edit the invoice"
-    >
-      <p>Edit</p></app-button
-    >
-    <app-button
-      class="invoice__button invoice__button--delete"
-      variant="btn_five"
-      aria-label="Delete the invoice"
-      >Delete</app-button
-    >
-    <app-button
-      (click)="markAsPaid()"
-      class="invoice__button invoice__button--mark-paid"
-      variant="btn_one"
-      aria-label="Mark the invoice as paid"
-      >Mark as Paid</app-button
-    >
-  </div>
-</div>
-@if (showDialogue()) {
-<app-dialog [(showDialoguePopup)]="showDialogue" [invoiceId]="invoiceId" />
-} }
+  @if (showDialogue()) {
+    <app-dialog [(showDialoguePopup)]="showDialogue" [invoiceId]="invoiceId" />
+  }
+}

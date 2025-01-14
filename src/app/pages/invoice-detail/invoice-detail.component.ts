@@ -6,7 +6,7 @@ import { ButtonComponent } from '@components/button/button.component';
 import { HeadlineComponent } from '@components/headline/headline.component';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectInvoices } from '@app/store/reducers';
+import { selectInvoices, selectLoading } from '@app/store/reducers';
 import { Invoice } from '@interfaces/index';
 import { ICONS } from '@constants/index';
 import { IconComponent } from '@components/icon/icon.component';
@@ -44,6 +44,7 @@ export class InvoiceDetailComponent implements OnInit {
   invoiceDetail: Invoice | undefined = undefined;
   invoices$: Observable<Invoice[]> = this.store.select(selectInvoices);
   showDialogue = signal<boolean>(false);
+  loading = this.store.selectSignal(selectLoading);
   showDialog() {
     this.showDialogue.set(true);
   }
@@ -64,12 +65,12 @@ export class InvoiceDetailComponent implements OnInit {
     if (!this.invoiceId) {
       return;
     }
-    this.store.dispatch(invoiceActions.loadInvoices());
 
     this.invoices$.subscribe((invoices) => {
       this.invoiceDetail = invoices.find(
         (invoice) => invoice.id === this.invoiceId
       );
     });
+    this.store.dispatch(invoiceActions.loadInvoices());
   }
 }

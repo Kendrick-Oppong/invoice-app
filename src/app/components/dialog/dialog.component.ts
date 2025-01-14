@@ -26,6 +26,7 @@ export class DialogComponent {
       setTimeout(() => {
         this.router.navigate(['/invoices']);
       }, 2000);
+      
     }
   }
 }

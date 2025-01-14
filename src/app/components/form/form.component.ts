@@ -19,6 +19,7 @@ import { DropdownComponent } from '@components/dropdown/dropdown.component';
 import { invoiceActions } from '@app/store/actions';
 import { InvoicesService } from '@app/services/invoices/invoices.service';
 import { Invoice } from '@interfaces/index';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -40,6 +41,7 @@ import { Invoice } from '@interfaces/index';
 export class FormComponent implements OnInit {
   private readonly store: Store = inject(Store);
   private readonly fb = inject(FormBuilder);
+  private readonly router: Router = inject(Router);
   private readonly invoicesService: InvoicesService = inject(InvoicesService);
   isShowAddInvoiceForm = this.store.selectSignal(selectShowAddInvoiceForm);
   icons = ICONS;
@@ -145,6 +147,9 @@ export class FormComponent implements OnInit {
             invoice: newInvoice,
           })
         );
+        setTimeout(() => {
+          this.router.navigate(['/invoices']);
+        }, 2000);
       } else {
         this.invoicesService.addInvoice(newInvoice).subscribe((invoice) => {
           this.store.dispatch(invoiceActions.addInvoice({ invoice }));
