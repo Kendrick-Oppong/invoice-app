@@ -2,8 +2,13 @@ import { Routes } from '@angular/router';
 import { LayoutComponent } from '@components/layout/layout.component';
 import { InvoicesComponent } from '@pages/invoices/invoices.component';
 import { InvoiceDetailComponent } from '@pages/invoice-detail/invoice-detail.component';
+import { SignInComponent } from '@components/sign-in/sign-in.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    component: SignInComponent,
+  },
   {
     path: '',
     component: LayoutComponent,
