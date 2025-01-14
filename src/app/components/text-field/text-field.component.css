@@ -1,0 +1,59 @@
+input,
+textarea {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  height: 4.8rem;
+  border: 1px solid var(--color-muted-blue);
+  border-radius: 0.4rem;
+  font-size: 1.6rem;
+  resize: none;
+}
+
+.form__group {
+  margin-top: 1.5rem;
+}
+
+.form__group--inline {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.form__section--inline {
+  display: flex;
+  gap: 3rem;
+}
+
+.form__section--inline .form__group {
+  width: 100%;
+}
+
+.form__input-wrapper {
+  width: 100%;
+}
+
+.form__section-header {
+  margin-block: 2rem;
+}
+
+.form__section-title--mod {
+  color: var(--color-muted-blue);
+  font-weight: 700;
+}
+
+.item-list__header,
+.item-list__row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.item-list__input-first {
+  grid-column: span 2;
+}
+
+.ng-touched.ng-invalid {
+  border: 1px solid var(--color-error) !important;
+}

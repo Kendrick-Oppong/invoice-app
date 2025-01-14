@@ -1,0 +1,15 @@
+button {
+  border-radius: 2.4rem;
+  cursor: pointer;
+  font-weight: 700;
+  padding-block: 1.1rem;
+  padding-inline: 1.1rem;
+  font-size: 1.5rem;
+  color: #fff;
+  gap: 1.6rem;
+  display: flex;
+  align-items: center;
+  background-color: inherit;
+  border: none;
+}
+

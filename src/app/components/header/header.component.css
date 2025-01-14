@@ -1,0 +1,34 @@
+.invoice-container,
+.invoice-container__filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoice-container {
+  position: relative;
+}
+
+.invoice-container__filter {
+  gap: 4rem;
+}
+.invoice-container__actions {
+  background-color: var(--color-primary-blue);
+  border-radius: 2.4rem;
+}
+
+.invoice-container__actions p {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 100%;
+}
+
+.invoice-container__actions span {
+  display: none;
+}
+
+@media screen and (min-width: 992px) {
+  .invoice-container__actions span {
+    display: inline-flex;
+  }
+}

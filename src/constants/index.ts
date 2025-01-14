@@ -6,6 +6,13 @@ export const ICONS = {
     height: 20,
     className: 'sidebar__theme-icon',
   },
+  sun: {
+    src: 'assets/icon-sun.svg',
+    alt: 'Moon Icon',
+    width: 20,
+    height: 20,
+    className: 'sidebar__theme-icon',
+  },
   avatar: {
     src: 'assets/image-avatar.jpg',
     alt: 'User Avatar',
@@ -19,5 +26,47 @@ export const ICONS = {
     width: 103,
     height: 103,
     className: 'sidebar__logo-image',
+  },
+  plus: {
+    src: 'assets/icon-plus.svg',
+    alt: 'plus',
+    width: 10,
+    height: 10,
+  },
+  carretDown: {
+    src: 'assets/icon-arrow-down.svg',
+    alt: 'plus',
+    width: 8,
+    height: 6,
+  },
+  carretRight: {
+    src: 'assets/icon-arrow-right.svg',
+    alt: 'arrow-right',
+    width: 8,
+    height: 8,
+  },
+  carretLeft: {
+    src: 'assets/icon-arrow-left.svg',
+    alt: 'arrow-right',
+    width: 8,
+    height: 8,
+  },
+  illustration: {
+    src: 'assets/illustration-empty.svg',
+    alt: 'arrow-right',
+    width: 242,
+    height: 200,
+  },
+  bin: {
+    src: 'assets/icon-delete.svg',
+    alt: 'arrow-right',
+    width: 12,
+    height: 12,
+  },
+  calender: {
+    src: 'assets/icon-calendar.svg',
+    alt: 'arrow-right',
+    width: 16,
+    height: 16,
   },
 };

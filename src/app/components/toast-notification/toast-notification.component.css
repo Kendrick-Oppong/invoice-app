@@ -1,0 +1,50 @@
+.notification {
+  position: fixed;
+  z-index: 1000;
+  padding: 0.8rem 1rem ;
+  border-radius: 4px;
+  animation: slideIn 0.5s ease-out;
+}
+
+span {
+    color: #fff;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.notification.success {
+  background-color: var(--color-mint-green);
+}
+
+.notification.error {
+  background-color: var(--color-error);
+}
+
+.notification.info {
+  background-color: var(--color-primary-blue);
+}
+
+/* For larger screens (desktop) */
+@media (min-width: 768px) {
+  .notification {
+    top: 20px;
+    right: 20px;
+    max-width: 300px;
+  }
+}
+
+/* For smaller screens (mobile) */
+@media (max-width: 767px) {
+  .notification {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

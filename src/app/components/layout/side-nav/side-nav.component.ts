@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
 import { ICONS } from '@constants/index';
 import { IconComponent } from '@components/icon/icon.component';
+import { ThemeToggleComponent } from "../../theme-toggle/theme-toggle.component";
 
 @Component({
   selector: 'app-side-nav',
   standalone: true,
-  imports: [NgOptimizedImage, IconComponent],
+  imports: [IconComponent, ThemeToggleComponent],
   templateUrl: './side-nav.component.html',
   styleUrl: './side-nav.component.css',
 })

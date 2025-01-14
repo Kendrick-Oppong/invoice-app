@@ -1,1 +1,23 @@
-<p>text works!</p>
+<ng-template #content><ng-content></ng-content></ng-template>
+
+@switch (variant()) {
+  @case ('p') {
+    <p>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </p>
+  }
+  
+  @case ('span') {
+    <span>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </span>
+  }
+
+   @case ('label') {
+    <label>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </label>
+  }
+
+}
+
