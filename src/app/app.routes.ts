@@ -3,6 +3,7 @@ import { LayoutComponent } from '@components/layout/layout.component';
 import { InvoicesComponent } from '@pages/invoices/invoices.component';
 import { InvoiceDetailComponent } from '@pages/invoice-detail/invoice-detail.component';
 import { SignInComponent } from '@components/sign-in/sign-in.component';
+import { NotFoundComponent } from '@pages/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -27,5 +28,9 @@ export const routes: Routes = [
         component: InvoiceDetailComponent,
       },
     ],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
