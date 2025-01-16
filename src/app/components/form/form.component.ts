@@ -177,7 +177,7 @@ export class FormComponent implements OnInit {
     });
 
     this.items.clear();
-    invoiceDetail.items.forEach((item: any) => {
+    invoiceDetail.items.forEach((item) => {
       this.items.push(
         this.fb.group({
           name: item.name,
