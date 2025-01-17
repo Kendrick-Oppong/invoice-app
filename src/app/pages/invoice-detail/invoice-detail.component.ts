@@ -5,9 +5,7 @@ import { TextComponent } from '@components/text/text.component';
 import { ButtonComponent } from '@components/button/button.component';
 import { HeadlineComponent } from '@components/headline/headline.component';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { selectInvoices, selectLoading } from '@app/store/reducers';
-import { Invoice } from '@interfaces/index';
+import {selectInvoiceDetail,selectLoading} from '@app/store/reducers';
 import { ICONS } from '@constants/index';
 import { IconComponent } from '@components/icon/icon.component';
 import { TitleCasePipe, LowerCasePipe, CommonModule } from '@angular/common';
@@ -41,8 +39,7 @@ export class InvoiceDetailComponent implements OnInit {
   private readonly store: Store = inject(Store);
   private readonly route: ActivatedRoute = inject(ActivatedRoute);
   invoiceId: string | null = '';
-  invoiceDetail: Invoice | undefined = undefined;
-  invoices$: Observable<Invoice[]> = this.store.select(selectInvoices);
+  invoiceDetail = this.store.selectSignal(selectInvoiceDetail);
   showDialogue = signal<boolean>(false);
   loading = this.store.selectSignal(selectLoading);
   showDialog() {
@@ -50,12 +47,19 @@ export class InvoiceDetailComponent implements OnInit {
   }
   toggleAddInvoiceForm() {
     this.store.dispatch(invoiceActions.showAddInvoiceForm());
-  }
+  } 
 
   markAsPaid() {
     if (this.invoiceId) {
       this.store.dispatch(
-        invoiceActions.markInvoiceAsPaid({ id: this.invoiceId })
+        invoiceActions.markInvoiceAsPaid({
+          id: this.invoiceId,
+          invoice: this.invoiceDetail()!,
+          status: 'paid',
+        })
+      );
+      this.store.dispatch(
+        invoiceActions.loadInvoiceDetails({ invoiceId: this.invoiceId })
       );
     }
   }
@@ -66,11 +70,8 @@ export class InvoiceDetailComponent implements OnInit {
       return;
     }
 
-    this.invoices$.subscribe((invoices) => {
-      this.invoiceDetail = invoices.find(
-        (invoice) => invoice.id === this.invoiceId
-      );
-    });
-    this.store.dispatch(invoiceActions.loadInvoices());
+    this.store.dispatch(
+      invoiceActions.loadInvoiceDetails({ invoiceId: this.invoiceId })
+    );
   }
 }
