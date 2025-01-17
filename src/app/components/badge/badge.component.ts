@@ -10,5 +10,5 @@ import { HeadlineComponent } from '@components/headline/headline.component';
   styleUrl: './badge.component.css',
 })
 export class BadgeComponent {
-  readonly status = input<BadgeStatus>('draft');
+  readonly status = input<BadgeStatus | undefined>('draft');
 }

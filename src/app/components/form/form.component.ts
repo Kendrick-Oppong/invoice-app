@@ -147,13 +147,8 @@ export class FormComponent implements OnInit {
             invoice: newInvoice,
           })
         );
-        setTimeout(() => {
-          this.router.navigate(['/invoices']);
-        }, 2000);
       } else {
-        this.invoicesService.addInvoice(newInvoice).subscribe((invoice) => {
-          this.store.dispatch(invoiceActions.addInvoice({ invoice }));
-        });
+        this.store.dispatch(invoiceActions.addInvoice({ invoice: newInvoice }));
       }
     }
   }
