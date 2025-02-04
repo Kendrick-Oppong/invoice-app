@@ -39,6 +39,8 @@ export interface InvoiceState {
   invoices: Invoice[];
   loading: boolean;
   error: string | null;
+  token: string | null;
+  invoiceDetail: Invoice | undefined;
   filteredInvoices: Invoice[];
   showAddInvoiceForm: boolean;
 }
@@ -53,7 +55,7 @@ export type FieldProps = {
   type: string;
   name: string;
   id: string;
-  class:string
+  class: string;
 };
 export interface NotificationState {
   message: string;

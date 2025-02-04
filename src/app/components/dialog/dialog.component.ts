@@ -23,10 +23,6 @@ export class DialogComponent {
   deleteInvoice() {
     if (this.invoiceId) {
       this.store.dispatch(invoiceActions.deleteInvoice({ id: this.invoiceId }));
-      setTimeout(() => {
-        this.router.navigate(['/invoices']);
-      }, 2000);
-      
     }
   }
 }

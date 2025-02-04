@@ -1,0 +1,46 @@
+.container {
+  display: grid;
+  place-items: center;
+  margin-top: 10rem;
+  padding: 0 1rem;
+}
+
+.content {
+  text-align: center;
+}
+
+.error-code {
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--color-muted-blue);
+}
+
+.message {
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.description {
+  margin-top: 1.5rem;
+  font-size: 2rem;
+  color: var(--color-muted-blue);
+}
+
+.go-home-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: white;
+  background-color: var(--color-primary-blue);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.go-home-btn:hover {
+  background-color: var(--color-secondary-blue);
+}

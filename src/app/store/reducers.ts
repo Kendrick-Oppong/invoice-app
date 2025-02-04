@@ -7,6 +7,8 @@ const initialState: InvoiceState = {
   invoices: [],
   loading: false,
   error: null,
+  token: null,
+  invoiceDetail: undefined,
   filteredInvoices: [],
   showAddInvoiceForm: false,
 };
@@ -15,6 +17,28 @@ export const InvoiceFeature = createFeature({
   name: 'Invoices',
   reducer: createReducer(
     initialState,
+    //Log in
+    on(invoiceActions.signIn, (state) =>
+      produce(state, (draft) => {
+        draft.loading = true;
+        draft.error = null;
+      })
+    ),
+    // Log in success and clear loading state and error state  if any  exist  in the state.
+    on(invoiceActions.signInSuccess, (state, { token }) =>
+      produce(state, (draft) => {
+        draft.loading = false;
+        draft.token = token;
+        draft.error = null;
+      })
+    ),
+    // Log in failure and clear loading state and error state  if any  exist  in the state.
+    on(invoiceActions.signInFailure, (state, { error }) =>
+      produce(state, (draft) => {
+        draft.error = error;
+        draft.loading = false;
+      })
+    ),
     // Load Invoices
     on(invoiceActions.loadInvoices, (state) =>
       produce(state, (draft) => {
@@ -30,6 +54,25 @@ export const InvoiceFeature = createFeature({
       })
     ),
     on(invoiceActions.loadInvoicesFailure, (state, { error }) =>
+      produce(state, (draft) => {
+        draft.error = error;
+        draft.loading = false;
+      })
+    ),
+
+    on(invoiceActions.loadInvoiceDetails, (state) =>
+      produce(state, (draft) => {
+        draft.loading = true;
+        draft.error = null;
+      })
+    ),
+    on(invoiceActions.loadInvoiceDetailsSuccess, (state, { invoice }) =>
+      produce(state, (draft) => {
+        draft.invoiceDetail = invoice;
+        draft.loading = false;
+      })
+    ),
+    on(invoiceActions.loadInvoiceDetailsFailure, (state, { error }) =>
       produce(state, (draft) => {
         draft.error = error;
         draft.loading = false;
@@ -69,13 +112,13 @@ export const InvoiceFeature = createFeature({
         if (index !== -1) {
           draft.invoices[index] = invoice;
         }
-        draft.loading = false; 
+        draft.loading = false;
       })
     ),
     on(invoiceActions.updateInvoiceFailure, (state, { error }) =>
       produce(state, (draft) => {
         draft.error = error;
-        draft.loading = false; 
+        draft.loading = false;
       })
     ),
 
@@ -85,15 +128,7 @@ export const InvoiceFeature = createFeature({
         draft.error = null;
       })
     ),
-    on(invoiceActions.deleteInvoiceSuccess, (state, { id }) =>
-      produce(state, (draft) => {
-        draft.invoices = draft.invoices.filter((item) => item.id !== id);
-        draft.filteredInvoices = draft.filteredInvoices.filter(
-          (item) => item.id !== id
-        );
-        draft.loading = false;
-      })
-    ),
+
     on(invoiceActions.deleteInvoiceFailure, (state, { error }) =>
       produce(state, (draft) => {
         draft.error = error;
@@ -116,12 +151,15 @@ export const InvoiceFeature = createFeature({
         draft.showAddInvoiceForm = !draft.showAddInvoiceForm;
       })
     ),
-    on(invoiceActions.markInvoiceAsPaid, (state, { id }) =>
+    on(invoiceActions.markInvoiceAsPaid, (state) =>
       produce(state, (draft) => {
-        const index = draft.invoices.findIndex((invoice) => invoice.id === id);
-        if (index !== -1) {
-          draft.invoices[index].status = 'paid';
-        }
+        draft.loading = true;
+        draft.error = null;
+      })
+    ),
+    on(invoiceActions.markInvoiceAsPaidFailure, (state, { error }) =>
+      produce(state, (draft) => {
+        draft.error = error;
         draft.loading = false;
       })
     )
@@ -134,6 +172,7 @@ export const {
   selectError,
   selectFilteredInvoices,
   selectShowAddInvoiceForm,
+  selectInvoiceDetail,
 } = InvoiceFeature;
 
 const themeState: { isDarkTheme: boolean } = {

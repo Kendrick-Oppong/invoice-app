@@ -1,33 +1,61 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Invoice } from '@interfaces/index';
+import { Observable } from 'rxjs';
+import { BadgeStatus, Invoice } from '@interfaces/index';
 import { FormArray, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InvoicesService {
-  private readonly baseUrl = '../../../assets/data/data.json';
-  private invoices: Invoice[] = [];
+  private readonly baseUrl =
+    'https://invoice-app-bknd-strapi-cloud.onrender.com';
+
   constructor(private readonly http: HttpClient) {}
 
+  signIn({
+    username,
+    password,
+  }: {
+    username: string;
+    password: string;
+  }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.baseUrl}/login`, {
+      username,
+      password,
+    });
+  }
   getInvoices(): Observable<Invoice[]> {
-    return this.http.get<Invoice[]>(this.baseUrl);
+    return this.http.get<Invoice[]>(`${this.baseUrl}/invoices`);
   }
 
-  addInvoice(invoice: Invoice): Observable<Invoice> {
-    this.invoices.push(invoice);
-    return of(invoice);
+  getInvoiceById({ invoiceId }: { invoiceId: string }): Observable<Invoice> {
+    return this.http.get<Invoice>(`${this.baseUrl}/invoices/${invoiceId}`);
   }
 
-  deleteInvoice(id: string): Observable<void> {
-    this.invoices = this.invoices.filter((item) => item.id !== id);
-    return of();
+  addInvoice({ invoice }: { invoice: Invoice }): Observable<Invoice> {
+    return this.http.post<Invoice>(`${this.baseUrl}/invoices`,  invoice );
   }
-  // updateInvoice(id: string, invoice: Invoice): Observable<Invoice> {
-    
-  // }
+
+  deleteInvoice({ id }: { id: string }): Observable<string> {
+    return this.http.delete<string>(`${this.baseUrl}/invoices/${id}`);
+  }
+  updateInvoice({
+    id,
+    invoice,
+  }: {
+    id: string;
+    invoice: Invoice;
+  }): Observable<Invoice> {
+    return this.http.put<Invoice>(`${this.baseUrl}/invoices/${id}`, invoice);
+  }
+
+  markAsPaid({ id, status, invoice }: { id: string; status: BadgeStatus; invoice: Invoice }) {
+    return this.http.put<Invoice>(`${this.baseUrl}/invoices/${id}`, {
+      ...invoice,
+      status,
+    });
+  }
 
   createInvoice(invoiceForm: FormGroup): Invoice {
     const createdAt = invoiceForm.get('createdAt')?.value;
@@ -103,8 +131,8 @@ export class InvoicesService {
     paymentDate.setDate(paymentDate.getDate() + daysToAdd); // Add the number of days to the current date
 
     const year = paymentDate.getFullYear();
-    const month = (paymentDate.getMonth() + 1).toString().padStart(2, '0'); 
-    const day = paymentDate.getDate().toString().padStart(2, '0'); 
+    const month = (paymentDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = paymentDate.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
 }

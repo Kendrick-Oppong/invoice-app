@@ -7,9 +7,9 @@
   aria-labelledby="form-heading"
 >
   <div class="form__container">
-    <app-headline variant="h2" id="form-heading" class="form__headline"
-      >New Invoice</app-headline
-    >
+    <app-headline variant="h2" id="form-heading" class="form__headline">
+      {{ invoiceDetail ? "Edit #" + invoiceDetail.id : "New Invoice" }}
+    </app-headline>
 
     <!-- Bill From Section -->
     <div class="form__section">

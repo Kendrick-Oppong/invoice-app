@@ -84,9 +84,6 @@ export class DatePickerComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
-    // Implementation not needed for this case
-  }
 
   toggleDatePicker(): void {
     this.isDatePickerOpen = !this.isDatePickerOpen;

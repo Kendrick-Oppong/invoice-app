@@ -18,8 +18,8 @@
       <div class="invoice__header">
         <app-text variant="p">Status</app-text>
         <app-badge
-          class="invoice__status-badge invoice__status-badge--{{ invoice.status }}"
-          [status]="invoice.status"
+          class="invoice__status-badge invoice__status-badge--{{ invoice()?.status }}"
+          [status]="invoice()?.status"
         ></app-badge>
       </div>
       <div class="invoice__actions" role="group" aria-label="Invoice actions">
@@ -54,16 +54,16 @@
       <div class="invoice-details__content">
         <div class="invoice-details__header">
           <app-headline variant="h2" class="invoice-details__id" id="invoice-id">
-            <span class="invoice-details__hash" aria-hidden="true">#</span>{{ invoice.id }}
+            <span class="invoice-details__hash" aria-hidden="true">#</span>{{ invoice()?.id }}
           </app-headline>
-          <app-text class="invoice-details__service" variant="p">{{ invoice.description }}</app-text>
+          <app-text class="invoice-details__service" variant="p">{{ invoice()?.description }}</app-text>
         </div>
 
         <div class="invoice-details__address">
-          <app-text class="invoice-details__address-line" variant="p">{{ invoice.senderAddress.street }}</app-text>
-          <app-text class="invoice-details__address--line1" variant="p">{{ invoice.senderAddress.city }}</app-text>
-          <app-text class="invoice-details__address--line2" variant="p">{{ invoice.senderAddress.postCode }}</app-text>
-          <app-text class="invoice-details__address-line" variant="p">{{ invoice.senderAddress.country }}</app-text>
+          <app-text class="invoice-details__address-line" variant="p">{{ invoice()?.senderAddress?.street }}</app-text>
+          <app-text class="invoice-details__address--line1" variant="p">{{ invoice()?.senderAddress?.city }}</app-text>
+          <app-text class="invoice-details__address--line2" variant="p">{{ invoice()?.senderAddress?.postCode }}</app-text>
+          <app-text class="invoice-details__address-line" variant="p">{{ invoice()?.senderAddress?.country }}</app-text>
         </div>
       </div>
     </section>
@@ -74,27 +74,27 @@
         <div class="invoice-summary__group">
           <div class="invoice-summary__item">
             <app-text class="invoice-summary__label" variant="p">Invoice Date</app-text>
-            <app-headline variant="h2" class="invoice-summary__value">{{ invoice.createdAt }}</app-headline>
+            <app-headline variant="h2" class="invoice-summary__value">{{ invoice()?.createdAt }}</app-headline>
           </div>
           <div class="invoice-summary__item">
             <app-text class="invoice-summary__label" variant="p">Payment Due</app-text>
-            <app-headline variant="h2" class="invoice-summary__value">{{ invoice.paymentDue }}</app-headline>
+            <app-headline variant="h2" class="invoice-summary__value">{{ invoice()?.paymentDue }}</app-headline>
           </div>
         </div>
         <div class="invoice-summary__group">
           <div class="invoice-summary__item">
             <app-text class="invoice-summary__label" variant="p">Bill To</app-text>
-            <app-headline variant="h2">{{ invoice.clientName | titlecase }}</app-headline>
-            <app-text class="invoice-summary__address-line" variant="p">{{ invoice.clientAddress.street }}</app-text>
-            <app-text class="invoice-summary__address-line" variant="p">{{ invoice.clientAddress.city }}</app-text>
-            <app-text class="invoice-summary__address-line" variant="p">{{ invoice.clientAddress.postCode }}</app-text>
-            <app-text class="invoice-summary__address-line" variant="p">{{ invoice.clientAddress.country }}</app-text>
+            <app-headline variant="h2">{{ invoice()?.clientName | titlecase }}</app-headline>
+            <app-text class="invoice-summary__address-line" variant="p">{{ invoice()?.clientAddress?.street }}</app-text>
+            <app-text class="invoice-summary__address-line" variant="p">{{ invoice()?.clientAddress?.city }}</app-text>
+            <app-text class="invoice-summary__address-line" variant="p">{{ invoice()?.clientAddress?.postCode }}</app-text>
+            <app-text class="invoice-summary__address-line" variant="p">{{ invoice()?.clientAddress?.country }}</app-text>
           </div>
         </div>
         <div class="invoice-summary__group">
           <div class="invoice-summary__item">
             <app-text class="invoice-summary__label" variant="p">Sent to</app-text>
-            <app-headline variant="h2">{{ invoice.clientEmail | lowercase }}</app-headline>
+            <app-headline variant="h2">{{ invoice()?.clientEmail | lowercase }}</app-headline>
           </div>
         </div>
       </div>
@@ -109,7 +109,7 @@
           <app-text class="invoice-table__label" variant="p">Price</app-text>
           <app-text class="invoice-table__label" variant="p">Total</app-text>
         </div>
-        @for (item of invoice.items; track $index) {
+        @for (item of invoice()?.items; track $index) {
           <div class="invoice-table__item">
             <app-headline class="invoice-table__item-name">{{ item.name }}</app-headline>
             <app-text class="invoice-table__qty" variant="p">{{ item.quantity }}</app-text>
@@ -130,14 +130,14 @@
       </div>
       <div class="invoice-table__footer">
         <app-text class="invoice-table__amount-label" variant="p"><span>Grand Total</span></app-text>
-        <app-headline class="invoice-table__amount" variant="h1"><span>£ {{ invoice.total }}</span></app-headline>
+        <app-headline class="invoice-table__amount" variant="h1"><span>£ {{ invoice()?.total }}</span></app-headline>
       </div>
     </section>
   </div>
-  <app-form [invoiceDetail]="invoiceDetail" />
+  <app-form [invoiceDetail]="invoiceDetail()" />
   </ng-container>
 </ng-template>
-@if (invoiceDetail; as invoice) {
+@if (invoiceDetail(); as invoice) {
   <div class="invoice__container-mod">
     <div class="invoice__actions-mod" role="group" aria-label="Invoice actions">
       <app-button class="invoice__button invoice__button--edit" variant="btn_three" aria-label="Edit the invoice">
