@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { invoiceActions } from '@app/store/actions';
+import { selectLoading } from '@app/store/reducers';
 import { TextFieldComponent } from '@components/text-field/text-field.component';
 import { Store } from '@ngrx/store';
 
@@ -15,6 +16,7 @@ import { Store } from '@ngrx/store';
 export class SignInComponent {
   private readonly fb: FormBuilder = inject(FormBuilder);
   private readonly store = inject(Store);
+  isLoading = this.store.selectSignal(selectLoading);
   emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   signInForm = this.fb.group({
     email: [
@@ -34,7 +36,6 @@ export class SignInComponent {
     }
 
     const { email, password } = this.signInForm.value;
-    // alert('Form submitted successfully');
     this.store.dispatch(
       invoiceActions.signIn({
         username: email!,

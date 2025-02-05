@@ -54,7 +54,9 @@
       </div>
 
       <div class="button-container">
-        <button type="submit" class="primary-button">Create Account</button>
+        <button type="submit" class="primary-button">
+          {{ isLoading() ? "Authenticating..." : "Create Account" }}
+        </button>
       </div>
     </form>
   </div>
