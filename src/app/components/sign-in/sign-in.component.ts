@@ -20,14 +20,14 @@ export class SignInComponent {
   emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   signInForm = this.fb.group({
     email: [
-      'kendrick.oppong@amalitech.com',
+      '',
       [
         Validators.required,
         Validators.email,
         Validators.pattern(this.emailPattern),
       ],
     ],
-    password: ['T[<?\\+DyKk~+', [Validators.required, Validators.min(2)]],
+    password: ['', [Validators.required, Validators.min(2)]],
   });
   onSubmit() {
     if (this.signInForm.invalid) {
